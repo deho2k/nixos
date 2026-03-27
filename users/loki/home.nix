@@ -1,6 +1,6 @@
 { config, pkgs,inputs, ... }:
 let
-  dotfiles = "${config.home.homeDirectory}/dotfiles/users/loki/modules";
+dotfiles = "${config.home.homeDirectory}/dotfiles/users/loki/modules";
 in
 {
   home.username = "loki";
@@ -22,6 +22,14 @@ in
       fastImage=$(find ~/.config/walls/fetch/  -type f \( -iname '*.png' -o -iname '*.jpg' \) | shuf -n1)
       fastfetch --logo "$fastImage" --logo-type kitty --logo-width 16 --logo-height 8
       '';
+  };
+  programs.git = {
+    userEmail = "deho2k@gmail.com";
+    userName = "loki"; # Or your preferred display name
+      extraConfig = {
+        url."git@github.com:".insteadOf = "https://github.com/";
+        credential.helper = "store";
+      };
   };
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
