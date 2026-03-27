@@ -24,7 +24,6 @@
             pkgs.xterm
         ];
     };
-    programs.nano.enable = false;
     documentation.nixos.enable = false;
 
     environment.localBinInPath = true;
@@ -36,10 +35,6 @@
         packages = with pkgs; [];
     };
 
-    environment.variables = {
-        EDITOR = "nvim";
-        VISUAL = "nvim";
-    };
     services.displayManager.ly.enable = true;
 
     nix.settings = {
