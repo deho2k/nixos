@@ -36,6 +36,10 @@
         packages = with pkgs; [];
     };
 
+    environment.variables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+    };
     services.displayManager.ly.enable = true;
 
     nix.settings = {
