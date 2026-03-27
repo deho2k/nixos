@@ -1,0 +1,97 @@
+/* color options */
+:root {
+    --colors: on;
+
+    --text-0: var(--bg-4); /* text on colored elements */
+
+    --text-1: {{ colors.on_surface.default.hex }};              /* primary text */
+    --text-2: {{ colors.on_surface.default.hex }};              /* headings / important */
+    --text-3: {{ colors.on_surface.default.hex }};              /* normal text */
+    --text-4: {{ colors.on_surface_variant.default.hex }};      /* icons / channels */
+    --text-5: {{ colors.on_surface_variant.default.hex }};      /* muted text */
+
+    --bg-1: {{ colors.surface_variant.default.hex }};           /* pressed buttons */
+    --bg-2: {{ colors.surface.default.hex }};                   /* buttons */
+    --bg-3: {{ colors.surface_variant.default.hex }};           /* spacing / panels */
+    --bg-4: 000000
+
+    --hover: {{ colors.surface_variant.default.hex }};
+    --active: {{ colors.surface_variant.default.hex }};
+    --active-2: {{ colors.surface_variant.default.hex }};
+    --message-hover: var(--hover);
+
+    --accent-1: {{ colors.primary.default.hex }};               /* links */
+    --accent-2: {{ colors.secondary.default.hex }};             /* subtle accents */
+    --accent-3: {{ colors.primary.default.hex }};               /* buttons */
+    --accent-4: {{ colors.primary_container.default.hex }};     /* hovered buttons */
+    --accent-5: {{ colors.primary.default.hex }};               /* active buttons */
+
+    --accent-new: {{ colors.error.default.hex }};               /* destructive (mute, deafen) */
+
+    --mention: linear-gradient(
+        to right,
+        color-mix(in hsl, {{ colors.secondary.default.hex }}, transparent 90%) 40%,
+        transparent
+    );
+
+    --mention-hover: linear-gradient(
+        to right,
+        color-mix(in hsl, {{ colors.secondary.default.hex }}, transparent 95%) 40%,
+        transparent
+    );
+
+    --reply: linear-gradient(
+        to right,
+        color-mix(in hsl, {{ colors.on_surface.default.hex }}, transparent 90%) 40%,
+        transparent
+    );
+
+    --reply-hover: linear-gradient(
+        to right,
+        color-mix(in hsl, {{ colors.on_surface.default.hex }}, transparent 95%) 40%,
+        transparent
+    );
+
+    --online: {{ colors.primary.default.hex }};
+    --dnd: {{ colors.error.default.hex }};
+    --idle: {{ colors.tertiary.default.hex }};
+    --streaming: {{ colors.secondary.default.hex }};
+    --offline: {{ colors.on_surface_variant.default.hex }};
+
+    --border-light: {{ colors.outline_variant.default.hex }};
+    --border: {{ colors.outline.default.hex }};
+    --border-hover: {{ colors.primary.default.hex }};
+    --button-border: {{ colors.outline_variant.default.hex }};
+
+    /* Material doesn’t give numeric ramps — these map semantically */
+
+    --red-1: {{ colors.error_container.default.hex }};
+    --red-2: {{ colors.error.default.hex }};
+    --red-3: {{ colors.error.default.hex }};
+    --red-4: {{ colors.error.default.hex }};
+    --red-5: {{ colors.on_error.default.hex }};
+
+    --green-1: {{ colors.primary_container.default.hex }};
+    --green-2: {{ colors.primary.default.hex }};
+    --green-3: {{ colors.primary.default.hex }};
+    --green-4: {{ colors.primary.default.hex }};
+    --green-5: {{ colors.on_primary.default.hex }};
+
+    --blue-1: {{ colors.secondary_container.default.hex }};
+    --blue-2: {{ colors.secondary.default.hex }};
+    --blue-3: {{ colors.secondary.default.hex }};
+    --blue-4: {{ colors.secondary.default.hex }};
+    --blue-5: {{ colors.on_secondary.default.hex }};
+
+    --yellow-1: {{ colors.tertiary_container.default.hex }};
+    --yellow-2: {{ colors.tertiary.default.hex }};
+    --yellow-3: {{ colors.tertiary.default.hex }};
+    --yellow-4: {{ colors.tertiary.default.hex }};
+    --yellow-5: {{ colors.on_tertiary.default.hex }};
+
+    --purple-1: {{ colors.secondary_container.default.hex }};
+    --purple-2: {{ colors.secondary.default.hex }};
+    --purple-3: {{ colors.secondary.default.hex }};
+    --purple-4: {{ colors.secondary.default.hex }};
+    --purple-5: {{ colors.on_secondary.default.hex }};
+}

@@ -1,0 +1,47 @@
+[config]
+# If set to enabled, it will check for updates when you run the matugen command, notifying you that an update is avaiable.
+# WARNING: Matugen needs to be compiled with the `update-informer` feature for this to work.
+version_check = false
+
+fallback_color = "#ffbf9b"
+
+caching = false
+
+# Changing the syntax
+# Expr is for keywords like {{ <keyword> }}
+expr_prefix = "{{"
+expr_postfix = "}}"
+
+# Block is for stuff like for loops etc.
+block_prefix = "<*"
+block_postfix = "*>"
+
+
+#[templates.spotify]
+#input_path = "./templates/spotify.ini"
+#output_path = "~/.config/spicetify/Themes/text/color.ini"
+
+#[templates.discord]
+#input_path = "./templates/discord.css"
+#output_path = "~/.config/Vencord/themes/colors.css"
+
+[templates.image]
+input_path = "./templates/image.txt"
+output_path = "/tmp/image.txt"
+
+[templates.qs]
+input_path = "./templates/qs.json"
+output_path = "~/.config/quickshell/vars/colors.json"
+
+[templates.kitty]
+input_path = "./templates/kitty.conf"
+output_path = "~/.config/kitty/colors.conf"
+post_hook = 'kill -SIGUSR1 $(pgrep kitty) && echo done'
+
+[templates.nvim]
+input_path = "./templates/nvim.vim"
+output_path = "~/.cache/wal/colors-wal.vim"
+
+expr_prefix = "{{"
+expr_postfix = "}}"
+

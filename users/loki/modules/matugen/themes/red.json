@@ -1,0 +1,66 @@
+{
+    "colors": {
+        "primary": {
+            "dark": { "color": "#fb4934" },
+            "default": { "color": "#fb4934" },
+            "light": { "color": "#cc241d" }
+        },
+        "secondary": {
+            "dark": { "color": "#fe8019" },
+            "default": { "color": "#fe8019" },
+            "light": { "color": "#d65d0e" }
+        },
+        "tertiary": {
+            "dark": { "color": "#fabd2f" },
+            "default": { "color": "#fabd2f" },
+            "light": { "color": "#d79921" }
+        },
+        "error": {
+            "dark": { "color": "#fb4934" },
+            "default": { "color": "#fb4934" },
+            "light": { "color": "#cc241d" }
+        },
+        "surface": {
+            "dark": { "color": "#1d2021" },
+            "default": { "color": "#282828" },
+            "light": { "color": "#fbf1c7" }
+        },
+        "surface_container": {
+            "dark": { "color": "#3c3836" },
+            "default": { "color": "#3c3836" },
+            "light": { "color": "#ebdbb2" }
+        },
+        "on_background": {
+            "dark": { "color": "#ebdbb2" },
+            "default": { "color": "#ebdbb2" },
+            "light": { "color": "#282828" }
+        },
+        "on_surface": {
+            "dark": { "color": "#ebdbb2" },
+            "default": { "color": "#ebdbb2" },
+            "light": { "color": "#3c3836" }
+        },
+        "outline": {
+            "dark": { "color": "#665c54" },
+            "default": { "color": "#7c6f64" },
+            "light": { "color": "#a89984" }
+        },
+        "inverse_surface": {
+            "dark": { "color": "#fbf1c7" },
+            "default": { "color": "#fbf1c7" },
+            "light": { "color": "#282828" }
+        },
+        "on_primary": {
+            "dark": { "color": "#282828" },
+            "default": { "color": "#282828" },
+            "light": { "color": "#fbf1c7" }
+        },
+        "on_secondary": {
+            "dark": { "color": "#282828" },
+            "default": { "color": "#282828" },
+            "light": { "color": "#fbf1c7" }
+        }
+    },
+    "is_dark_mode": true,
+    "mode": "dark"
+}
