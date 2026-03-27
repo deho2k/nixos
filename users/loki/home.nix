@@ -25,7 +25,7 @@ in
   };
   programs.git = {
     userEmail = "deho2k@gmail.com";
-    userName = "loki"; # Or your preferred display name
+    userName = "loki";
       extraConfig = {
         url."git@github.com:".insteadOf = "https://github.com/";
         credential.helper = "store";
