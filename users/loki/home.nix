@@ -24,9 +24,9 @@ in
       '';
   };
   programs.git = {
-    extraConfig = {
-      url."git@github.com:".insteadOf = "https://github.com/";
-      credential.helper = "store";
+    settings.user = {
+      name = "loki";
+      email = "deho2k@gmail.com";
     };
   };
   home.pointerCursor = {
@@ -37,8 +37,8 @@ in
 
   imports = [
     ./opts/packages.nix
-      ./opts/config.nix
-      ./modules/firefox/firefox.nix
-      ./modules/nvim/nvim.nix
+    ./opts/config.nix
+    ./modules/firefox/firefox.nix
+    ./modules/nvim/nvim.nix
   ];
 }
