@@ -1,15 +1,9 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    hyprland.url = "github:hyprwm/Hyprland";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    matugen.url = "github:/InioX/Matugen";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -18,8 +12,6 @@
     nixpkgs,
     neovim-nightly-overlay,
     home-manager,
-    quickshell,
-    matugen,
     ... } @ inputs: {
       nixosConfigurations.miku = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
