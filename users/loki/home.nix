@@ -24,12 +24,10 @@ in
       '';
   };
   programs.git = {
-    userEmail = "deho2k@gmail.com";
-    userName = "loki";
-      extraConfig = {
-        url."git@github.com:".insteadOf = "https://github.com/";
-        credential.helper = "store";
-      };
+    extraConfig = {
+      url."git@github.com:".insteadOf = "https://github.com/";
+      credential.helper = "store";
+    };
   };
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
@@ -39,8 +37,8 @@ in
 
   imports = [
     ./opts/packages.nix
-    ./opts/config.nix
-    ./modules/firefox/firefox.nix
-    ./modules/nvim/nvim.nix
+      ./opts/config.nix
+      ./modules/firefox/firefox.nix
+      ./modules/nvim/nvim.nix
   ];
 }
