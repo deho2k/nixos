@@ -1,9 +1,6 @@
 {pkgs,inputs, ... }:
 
 {
-  imports = [
-    inputs.matugen.nixosModules.default
-  ];
   xdg.desktopEntries.discord = {
     name = "discord";
     exec = "firefox discord.com/channels/@me";
@@ -11,8 +8,8 @@
     categories = [ "Utility" ];
   };
   home.packages =  [
-    inputs.quickshell.packages.${pkgs.system}.default
-    inputs.matugen.packages.${pkgs.system}.default
+    pkgs.quickshell
+    pkgs.matugen
     pkgs.kitty
     pkgs.yazi
     pkgs.dragon-drop

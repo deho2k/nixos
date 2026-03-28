@@ -35,6 +35,6 @@
     "wallpaper": {
         "changeBacklight": true,
         "swwwTransition": "wave",
-        "theme": "monochrome"
+        "theme": "wallpaper"
     }
 }

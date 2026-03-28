@@ -39,8 +39,8 @@ in
 
   imports = [
     ./opts/packages.nix
-      ./opts/config.nix
-      ./modules/firefox/firefox.nix
-      ./modules/nvim/nvim.nix
+    ./opts/config.nix
+    ./modules/firefox/firefox.nix
+    ./modules/nvim/nvim.nix
   ];
 }
