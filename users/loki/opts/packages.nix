@@ -23,7 +23,6 @@
     pkgs.wl-clipboard
     pkgs.jq
     pkgs.btop
-    pkgs.foliate
     pkgs.fastfetch
     pkgs.playerctl
 
