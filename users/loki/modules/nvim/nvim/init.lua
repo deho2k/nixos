@@ -83,7 +83,7 @@ require("blink.cmp").setup({
 
 local lsp_servers = {
   lua_ls = {
-    cmd = { "lua-language-server" },
+    cmd = { "/etc/profiles/per-user/loki/bin/lua-language-server" },
     settings = {
       Lua = {
         workspace = {
@@ -92,9 +92,8 @@ local lsp_servers = {
       },
     },
   },
-
   qmlls = {
-    cmd = { "qmlls" },
+    cmd = { "/etc/profiles/per-user/loki/bin/qmlls" },
   },
 }
 
