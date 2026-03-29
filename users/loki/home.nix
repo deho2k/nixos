@@ -21,7 +21,7 @@ in
     bashrcExtra = ''
       fastImage=$(find ~/.config/walls/fetch/  -type f \( -iname '*.png' -o -iname '*.jpg' \) | shuf -n1)
       fastfetch --logo "$fastImage" --logo-type kitty --logo-width 16 --logo-height 8
-      '';
+    '';
   };
   programs.git = {
     settings.user = {

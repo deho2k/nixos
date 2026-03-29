@@ -2,7 +2,7 @@
 {
   environment.systemPackages = [
     pkgs.git
-      inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
+    inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
   ];
   programs.neovim = {
     enable = true;
@@ -10,10 +10,9 @@
     defaultEditor = true;
   };
   fonts.packages = with pkgs; [
-
     nerd-fonts.jetbrains-mono
-      nerd-fonts.fira-code
-      noto-fonts
-      noto-fonts-color-emoji
+    nerd-fonts.fira-code
+    noto-fonts
+    noto-fonts-color-emoji
   ];
 }
