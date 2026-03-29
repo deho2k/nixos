@@ -24,12 +24,10 @@ in
       '';
   };
   programs.git = {
-    userEmail = "deho2k@gmail.com";
-    userName = "loki";
-      extraConfig = {
-        url."git@github.com:".insteadOf = "https://github.com/";
-        credential.helper = "store";
-      };
+    settings.user = {
+      name = "loki";
+      email = "deho2k@gmail.com";
+    };
   };
   home.pointerCursor = {
     package = pkgs.bibata-cursors;

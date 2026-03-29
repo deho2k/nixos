@@ -51,7 +51,7 @@ vim.cmd.colorscheme("neopywal")
 
 -- tree sitter
 vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" }, { confirm = false })
-require("nvim-treesitter.install").update("all")
+-- require("nvim-treesitter.install").update("all")
 
 -- tree view
 vim.pack.add({
