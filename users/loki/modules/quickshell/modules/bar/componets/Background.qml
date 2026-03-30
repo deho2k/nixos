@@ -1,7 +1,8 @@
 import QtQuick
+import qs.config
 Rectangle{
   height: parent.height
-  color: "yellow"
-  anchors.margins: 2
+  color: Colors.background
+  anchors.margins: 12
   radius: parent.radius
 }

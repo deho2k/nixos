@@ -1,15 +1,18 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell
-import QtQuick.Layouts
 import QtQuick
+import qs.config
 import "componets"
 
 Variants {
+  id: root
   model: Quickshell.screens
-
   PanelWindow {
-    id: root
-    property var modelData
+    id: bar
+    required property var modelData
     screen: modelData
+    color: "transparent"
     implicitHeight: 30
     anchors {
       top:true
@@ -18,14 +21,13 @@ Variants {
     }
     Rectangle {
       anchors.fill: parent
-      color: "blue"
+      color: Colors.background
       anchors.margins: 2
-      radius: 5
+      radius: Config.bar.radius
 
       Clock {
         id: clock
         anchors.left: parent.left
-      anchors.margins: 2
       }
       Workspaces {
         id: workspaces

@@ -1,14 +1,11 @@
-
 import QtQuick
+import qs.widgets
+import qs.config
 
 Background{
-  width: clockText.width
-  Text {
-    anchors.verticalCenter: parent.verticalCenter
-    id:clockText
-    text: "22:20"
-
-    font.pixelSize: 12
-    font.bold: true
+  width: cpu.width
+  StyledText {
+    id: cpu
+    text: "  " + Config.cpuUsage
   }
 }
