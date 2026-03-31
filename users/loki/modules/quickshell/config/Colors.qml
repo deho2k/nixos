@@ -3,9 +3,19 @@ import Quickshell
 import QtQuick
 import Quickshell.Io
 Singleton {
+  id:root
+    IpcHandler {
+        target: "colors"
+        function reload() {
+            root.updateColors()
+        }
+    }
+    function updateColors() {
+        readProcess.running = true;
+    }
     Process {
         id: readProcess
-        command: ["cat", Quickshell.env("HOME") + "/.config/quickshell/vars/colors.json"]
+        command: ["cat", Quickshell.env("HOME") + "/.config/quickshell/config/json/matugen.json"]
         running: false
         property string buffer: ""
         stdout: SplitParser {
@@ -30,15 +40,6 @@ Singleton {
                     buffer = ""
                 }
             }
-        }
-    }
-    function updateColors() {
-        readProcess.running = true;
-    }
-    IpcHandler {
-        target: "colors"
-        function reload() {
-            updateColors()
         }
     }
     property color background: "#141315"
@@ -92,7 +93,5 @@ Singleton {
     property color tertiary_fixed: "#e5dff9"
     property color tertiary_fixed_dim: "#c8c3dc"
     property string image: ""
-    property color backlight: outline_variant
-
     Component.onCompleted: { readProcess.running = true }
 }

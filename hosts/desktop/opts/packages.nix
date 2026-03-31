@@ -2,13 +2,12 @@
 {
   environment.systemPackages = [
     pkgs.git
+<<<<<<< HEAD
     inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
+=======
+>>>>>>> origin/qsRevamp
   ];
-  programs.neovim = {
-    enable = true;
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-    defaultEditor = true;
-  };
+  programs.neovim.enable = true;
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code

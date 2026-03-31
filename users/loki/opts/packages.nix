@@ -22,7 +22,14 @@
     pkgs.btop
     pkgs.fastfetch
     pkgs.playerctl
+    pkgs.zip
 
+#neovim
+    pkgs.ripgrep
+    pkgs.lua-language-server
+    pkgs.kdePackages.qtdeclarative
+
+#minecraft server
     pkgs.jdk17
 #hyprland ecosystem
     pkgs.hyprshot
