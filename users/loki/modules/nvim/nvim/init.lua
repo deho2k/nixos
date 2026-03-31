@@ -130,3 +130,4 @@ vim.keymap.set("n", "<leader>ff", pickers.find_files, { desc = "[F]ind [F]iles",
 vim.keymap.set("n", "<leader>fg", pickers.grep_string, { desc = "[F]ind [W]ord", })
 
 -- vim.pack.update()
+
