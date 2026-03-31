@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import qs.config
 
 Background {
-    width: layout.implicitWidth
+    width: layout.implicitWidth + 20
     RowLayout {
         id: layout
         anchors.centerIn: parent
@@ -18,7 +18,7 @@ Background {
                 Layout.preferredHeight: 12
 
                 radius: 6
-                color: isActive ? Colors.primary_fixed : Colors.primary
+                color: isActive ? Colors.primary : Colors.secondary
 
                 Behavior on Layout.preferredWidth { 
                     NumberAnimation { duration: 150; easing.type: Easing.OutCubic } 

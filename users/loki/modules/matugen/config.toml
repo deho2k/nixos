@@ -31,7 +31,7 @@ output_path = "/tmp/image.txt"
 
 [templates.qs]
 input_path = "./templates/qs.json"
-output_path = "~/.config/quickshell/vars/colors.json"
+output_path = "~/.config/quickshell/config/json/matugen.json"
 
 [templates.kitty]
 input_path = "./templates/kitty.conf"

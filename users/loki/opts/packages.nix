@@ -22,6 +22,7 @@
     pkgs.btop
     pkgs.fastfetch
     pkgs.playerctl
+    pkgs.zip
 
 #neovim
     pkgs.ripgrep

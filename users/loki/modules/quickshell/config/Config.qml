@@ -9,8 +9,12 @@ import "json"
 Singleton {
   id: root
 
+  // !! folder where u save ur matugen themes json files
+  property string matugenThemes: "~/.config/matugen/themes/"
+
   JsonReader {id: cfg}
   property alias bar: cfg.bar
+  property alias theme: cfg.theme
 
   // mpris default chain
   property var player: {
@@ -18,19 +22,6 @@ Singleton {
       return players.find(p => p.identity === "Spotify") ?? 
              players.find(p => p.identity === "mpc" || p.identity === "mpd") ?? 
              (players.length > 0 ? players[0] : null);
-  }
-
-  function setWallpaper(path = "") { 
-    const swwwCmd = path == ""? 
-    `echo "no path"` :
-    `swww img "${path}" --transition-type wave --transition-duration 1`;
-
-    const matugenCmd = `matugen image "${path == ""? Colors.image: path}" --source-color-index 0`
-
-    Quickshell.execDetached([
-      "bash", "-c", 
-      `${swwwCmd} && ${matugenCmd} && qs ipc call colors reload`
-    ]);
   }
 
   readonly property string time: { Qt.formatDateTime(clock.date, "hh:mm") }
@@ -73,5 +64,26 @@ Singleton {
           cpuProc.running = true
           memProc.running = true
       }
+  }
+
+  // FUNCTIONS
+  function setWallpaper(path = "") { 
+    const transition = Config.theme.transition
+    const theme = Config.theme.theme
+    const duration = Config.theme.transitionDuration
+    const imagePath = path == ""? Colors.image : path
+
+    const swwwCmd = path == ""? 
+      `echo "no path cuz maybe we switching to a theme"` :
+      `swww img "${path}" --transition-type ${transition} --transition-duration ${duration}`;
+
+    const matugenCmd = `matugen image "${imagePath}" --source-color-index 0`
+
+    const matugenArgs = theme == "wallpaper" ?
+      "" :
+      `--import-json ${matugenThemes}${theme}.json`;
+    Quickshell.execDetached([ "bash", "-c", 
+      `${swwwCmd} && ${matugenCmd} ${matugenArgs} && qs ipc call colors reload`
+    ]);
   }
 }
