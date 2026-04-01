@@ -4,7 +4,6 @@ import QtQuick.Layouts
 import qs.config
 
 Background {
-    width: layout.implicitWidth + 20
     RowLayout {
         id: layout
         anchors.centerIn: parent

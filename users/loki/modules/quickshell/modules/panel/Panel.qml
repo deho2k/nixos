@@ -34,8 +34,8 @@ PanelWindow {
     radius: 4
     height: parent.height
     width: parent.width
-    border.width:2
-    border.color:Colors.outline
+    border.width: 2
+    border.color: Colors.outline
 
     ColumnLayout {
       id: launcherContent

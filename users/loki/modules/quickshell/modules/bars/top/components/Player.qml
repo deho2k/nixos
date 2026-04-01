@@ -1,20 +1,20 @@
 import QtQuick
 import QtQuick.Layouts
-import qs.widgets
 import qs.config
+import qs.widgets
 
 Background{
-  width: icon.width + tracktitle.width +  25
   RowLayout {
     spacing: 5
     anchors.centerIn: parent
     StyledText {
       id:icon
-      text: Config.player.identity == "Spotify"? "": "󰎆"
+      text: Config.player ? Config.player.identity == "Spotify"? "": "󰎆" : ""
     }
     StyledText {
       id: tracktitle
-      text: Config.player.tracktitle
+      Layout.maximumWidth: 200
+      text: Config.player ? Config.player.trackTitle : ""
     }
   }
 }

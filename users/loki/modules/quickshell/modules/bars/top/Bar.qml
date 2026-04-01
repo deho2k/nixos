@@ -3,7 +3,7 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
 import qs.config
-import "componets"
+import "components"
 
 Variants {
   id: root
@@ -48,11 +48,7 @@ Variants {
       }
       Cpu{
         id: cpu
-        anchors.right: battery.left
-      }
-      Battery {
-        id:battery
-        anchors.right:parent.right
+        anchors.right: parent.right
       }
     }
   }

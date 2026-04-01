@@ -7,7 +7,7 @@ import "../componenets"
 ColumnLayout {
   spacing: 16
   Text {
-    text: "General"
+    text: "Bar"
     font.pixelSize: 32
     font.bold: true 
     color: Colors.inverse_surface

@@ -14,7 +14,6 @@
     pkgs.yazi
     pkgs.dragon-drop
     pkgs.spotify
-    pkgs.steam
     pkgs.swww
     pkgs.appimage-run
     pkgs.wl-clipboard

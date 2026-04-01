@@ -3,10 +3,9 @@ import qs.widgets
 import qs.config
 
 Background{
-  width: cpu.width + 15
   StyledText {
     id: cpu
-    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.centerIn: parent
     text: "  " + Config.cpuUsage
   }
 }

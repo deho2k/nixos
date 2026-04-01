@@ -4,10 +4,9 @@ import qs.widgets
 import qs.config
 
 Background{
-  width: battery.width + 15
   StyledText {
     id: battery
-    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.centerIn: parent
     property string batteryIcon: {
       let pct = Config.battery.percentage
 

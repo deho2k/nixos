@@ -12,11 +12,8 @@ Singleton {
 
   // !! folder where u save ur matugen themes json files
   property string matugenThemes: "~/.config/matugen/themes/"
-  property var battery: UPower.displayDevice
 
-  JsonReader {id: cfg}
-  property alias bar: cfg.bar
-  property alias theme: cfg.theme
+  property var battery: UPower.displayDevice
 
   // mpris default chain
   property var player: {
@@ -26,12 +23,21 @@ Singleton {
              (players.length > 0 ? players[0] : null);
   }
 
-  readonly property string time: { Qt.formatDateTime(clock.date, "hh:mm") }
+  JsonReader {id: cfg}
+  property alias bar: cfg.bar
+  property alias theme: cfg.theme
+  property alias hyprland: cfg.hyprland
+
+  property string barLayout: "side"
+
+  readonly property string timeHours: { Qt.formatDateTime(clock.date, "hh") }
+  readonly property string timeMinutes: { Qt.formatDateTime(clock.date, "mm") }
   SystemClock {
     id: clock
     precision: SystemClock.Minutes
   }
   property int memUsage: 0
+
   Process {
       id: memProc
       command: ["sh", "-c", "free | grep Mem"]
@@ -87,5 +93,8 @@ Singleton {
     Quickshell.execDetached([ "bash", "-c", 
       `${swwwCmd} && ${matugenCmd} ${matugenArgs} && qs ipc call colors reload`
     ]);
+  }
+  function hyprlandRuntimePush(name, value) {
+      Quickshell.execDetached(["bash", "-c", `sed -i 's/^\\$${name}=.*/\\$${name}=${value}/' ~/.config/hypr/hyprland/runtime.conf`])
   }
 }

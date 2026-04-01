@@ -10,9 +10,9 @@ FileView {
     onFileChanged: reload()
     onAdapterUpdated: writeAdapter()
 
-    property alias config: adapter
     property alias bar: adapter.bar
     property alias theme: adapter.theme
+    property alias hyprland: adapter.hyprland
 
     JsonAdapter {
         id: adapter
@@ -25,6 +25,10 @@ FileView {
             property int transitionDuration: 1
             property string transition: "wave"
             property string theme: "wallpaper"
+        }
+        property JsonObject hyprland: JsonObject {
+            property int gapsIn: 8
+            property int gapsOut: 8
         }
     }
 }
