@@ -2,6 +2,7 @@
 {
   environment.systemPackages = [
     pkgs.git
+    pkgs.brightnessctl
     inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
   ];
   services.upower.enable = true;

@@ -26,8 +26,8 @@ Rectangle {
             var centerX = width / 2;
             var centerY = height / 2;
 
-            var lineWidth = 5; 
-            var radius = (Math.min(width, height) / 2) - (lineWidth / 2) - 10;
+            var lineWidth = 8; 
+            var radius = (Math.min(width, height) / 2) - (lineWidth / 2) - 5;
             
             var startAngle = -Math.PI / 2; 
             var endAngle = startAngle + (2 * Math.PI * (root.percentage / 100));
@@ -40,7 +40,7 @@ Rectangle {
 
             ctx.beginPath();
             ctx.strokeStyle = root.progressColor; 
-            ctx.lineWidth = lineWidth;
+            ctx.lineWidth = lineWidth - 1;
             ctx.lineCap = "round";
             ctx.arc(centerX, centerY, radius, startAngle, endAngle);
             ctx.stroke();
@@ -55,7 +55,7 @@ Rectangle {
     }
     StyledText {
       text: root.icon
-      font.pixelSize: 10
+      font.pixelSize: 16
       anchors.centerIn: parent
     }
 }

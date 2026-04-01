@@ -1,5 +1,5 @@
-
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
@@ -8,8 +8,11 @@ import qs.config
 PanelWindow {
   id: playerOsd
   property int volumePerc: 50
-  anchors.bottom: true
-  margins.bottom: 60
+  anchors.left: true
+  anchors.top: true
+
+  margins.top: 60
+  margins.left: 60
 
   exclusionMode: ExclusionMode.Ignore
   implicitWidth: 400
@@ -61,6 +64,35 @@ PanelWindow {
             font.pixelSize: 16
             elide: Text.ElideRight
             Layout.rightMargin: 8
+          }
+
+          ProgressBar {
+            id: pb
+            Layout.fillWidth: true
+            Layout.margins: 15
+            Layout.leftMargin: 0
+            implicitHeight: 8
+            value: Config.player.position
+            from: 0
+            to: Config.player.length
+
+            background: Rectangle {
+              implicitHeight: 8
+              radius: 4
+              color: Colors.outline_variant
+            }
+
+            contentItem: Item {
+              implicitWidth: pb.width
+              implicitHeight: pb.height
+
+              Rectangle {
+                width: pb.visualPosition * parent.width
+                height: parent.height
+                radius: 4
+                color: Colors.outline
+              }
+            }
           }
         }
       }

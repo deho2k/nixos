@@ -2,7 +2,7 @@
     "bar": {
         "floating": false,
         "margins": 0,
-        "radius": 6
+        "radius": 9
     },
     "hyprland": {
         "gapsIn": 0,

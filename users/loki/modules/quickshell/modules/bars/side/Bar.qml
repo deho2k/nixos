@@ -15,7 +15,7 @@ Variants {
     property var margins: Config.bar.margins
     screen: modelData
     color: "transparent"
-    width: 40 
+    width: 50 
 
     anchors {
       left: true
@@ -50,6 +50,10 @@ Variants {
 
         Item { Layout.fillHeight: true }
 
+        Battery {
+          id:battery
+          Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
+        }
         Ram {
           id: ram
           Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter

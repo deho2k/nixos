@@ -16,8 +16,9 @@ ColumnLayout {
 
   Slider {
     label: "margins"
-    from: -16
-    to: 600
+    from: -30
+    to: 400
+    step: 10
     value: Config.bar.margins
     onValueChanged: Config.bar.margins =  value
   }

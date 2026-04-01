@@ -4,6 +4,7 @@ import qs.config
 import qs.widgets
 
 Background{
+  visible: Config.player
   RowLayout {
     spacing: 5
     anchors.centerIn: parent
