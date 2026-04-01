@@ -34,7 +34,7 @@ Variants {
         id: clock
         anchors.left: parent.left
       }
-      Spotify {
+      Player {
         id: spotify
         anchors.left: clock.right
       }
@@ -48,7 +48,11 @@ Variants {
       }
       Cpu{
         id: cpu
-        anchors.right: parent.right
+        anchors.right: battery.left
+      }
+      Battery {
+        id:battery
+        anchors.right:parent.right
       }
     }
   }

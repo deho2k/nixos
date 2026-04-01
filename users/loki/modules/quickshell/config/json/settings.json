@@ -1,12 +1,12 @@
 {
     "bar": {
-        "floating": true,
-        "margins": 8,
+        "floating": false,
+        "margins": -8,
         "radius": 8
     },
     "theme": {
         "theme": "wallpaper",
         "transition": "outer",
-        "transitionDuration": 5
+        "transitionDuration": 2
     }
 }

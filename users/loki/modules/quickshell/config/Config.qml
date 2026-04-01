@@ -3,6 +3,7 @@ pragma Singleton
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Mpris 
+import Quickshell.Services.UPower 
 import QtQuick
 import "json"
 
@@ -11,6 +12,7 @@ Singleton {
 
   // !! folder where u save ur matugen themes json files
   property string matugenThemes: "~/.config/matugen/themes/"
+  property var battery: UPower.displayDevice
 
   JsonReader {id: cfg}
   property alias bar: cfg.bar

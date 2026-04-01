@@ -4,6 +4,7 @@
     pkgs.git
     inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
   ];
+  services.upower.enable = true;
   programs.neovim = {
     enable = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;

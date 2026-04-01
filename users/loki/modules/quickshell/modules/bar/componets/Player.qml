@@ -10,11 +10,11 @@ Background{
     anchors.centerIn: parent
     StyledText {
       id:icon
-      text: Config.player.identity == "spotify"? "": "󰎆"
+      text: Config.player.identity == "Spotify"? "": "󰎆"
     }
     StyledText {
       id: tracktitle
-      text: Config.player.trackTitle
+      text: Config.player.tracktitle
     }
   }
 }
