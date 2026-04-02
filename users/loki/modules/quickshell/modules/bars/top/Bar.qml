@@ -42,6 +42,11 @@ Variants {
         id: workspaces
         anchors.centerIn: parent
       }
+      Battery {
+        visible: Config.battery.percentage != 0
+        id:battery
+        anchors.right: ram.left
+      }
       Ram {
         id: ram
         anchors.right: cpu.left

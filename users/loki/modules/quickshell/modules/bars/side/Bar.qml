@@ -51,6 +51,7 @@ Variants {
         Item { Layout.fillHeight: true }
 
         Battery {
+          visible: Config.battery.percentage != 0
           id:battery
           Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
         }

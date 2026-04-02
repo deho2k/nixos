@@ -1,12 +1,12 @@
 {
     "bar": {
         "floating": false,
-        "margins": 0,
-        "radius": 9
+        "margins": 100,
+        "radius": 8
     },
     "hyprland": {
         "gapsIn": 0,
-        "gapsOut": 0
+        "gapsOut": 5
     },
     "theme": {
         "theme": "wallpaper",
