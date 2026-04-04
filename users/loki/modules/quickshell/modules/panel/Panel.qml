@@ -7,11 +7,15 @@ import "componets"
 PanelWindow {
   id: root
   required property var model
-  implicitHeight: 500
-  implicitWidth: 450
+  implicitHeight: 600
+  implicitWidth: 550
   focusable: true
   color: "transparent"
   onVisibleChanged: search.text = ""
+  exclusionMode: ExclusionMode.Normal
+  anchors {
+    left:false
+  }
 
   function filterApps(query) {
     if (query === "") {
@@ -29,18 +33,22 @@ PanelWindow {
     model = results;
     list.currentIndex = 0;
   }
+  Arc {
+    anchors.bottom: parent.top
+    anchors.left: parent.left
+  }
   Rectangle {
     color: Colors.surface
-    radius: 4
+    anchors.margins: 40
+    anchors.fill: parent
+    radius: 12
     height: parent.height
     width: parent.width
-    border.width: 2
-    border.color: Colors.outline
 
     ColumnLayout {
       id: launcherContent
       anchors.fill: parent
-      anchors.margins: 10
+      anchors.margins: 20
       spacing: 14
 
       SearchBar {

@@ -4,17 +4,19 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
 import qs.config
+import qs.widgets
 
 PanelWindow {
   id: playerOsd
   property int volumePerc: 50
+  property int radius: 12
   anchors.left: true
   anchors.top: true
 
-  margins.top: 60
-  margins.left: 60
+  margins.top: 80
+  margins.left: Config.frame.enabled?  0: 60
 
-  exclusionMode: ExclusionMode.Ignore
+  exclusionMode: ExclusionMode.Normal
   implicitWidth: 400
   implicitHeight: 150
   color: "transparent"
@@ -27,7 +29,9 @@ PanelWindow {
       Layout.fillWidth: true
       Layout.fillHeight: true
       implicitWidth: 15
-      radius: 16
+      radius: playerOsd.radius
+      bottomLeftRadius: Config.frame.enabled? 0 : playerOsd.radius
+      topLeftRadius: Config.frame.enabled? 0 : playerOsd.radius
       color: Colors.background
 
       RowLayout {
@@ -47,30 +51,23 @@ PanelWindow {
           }
         }
         ColumnLayout {
-          Text {
+          StyledText {
+            text: Config.player.trackTitle
+            font.pixelSize: 20
             Layout.maximumWidth: playerOsd.width - artImage.width - 40
             Layout.minimumWidth: 230
-            text: Config.player.trackTitle
-            color: Colors.primary
-            font.pixelSize: 20
-            font.bold: true
-            elide: Text.ElideRight
-            maximumLineCount: 1
           }
-          Text {
+          StyledText {
             text: Config.player.trackArtist
-            Layout.maximumWidth: playerOsd.width - artImage.width - 40
-            color: Colors.secondary
             font.pixelSize: 16
-            elide: Text.ElideRight
+            Layout.maximumWidth: playerOsd.width - artImage.width - 40
             Layout.rightMargin: 8
           }
 
           ProgressBar {
             id: pb
             Layout.fillWidth: true
-            Layout.margins: 15
-            Layout.leftMargin: 0
+            Layout.rightMargin: 20
             implicitHeight: 8
             value: Config.player.position
             from: 0
@@ -93,6 +90,10 @@ PanelWindow {
                 color: Colors.outline
               }
             }
+          }
+          StyledText {
+            text: Config.player.isPlaying ? "" : ""
+            Layout.alignment: Qt.AlignCenter
           }
         }
       }

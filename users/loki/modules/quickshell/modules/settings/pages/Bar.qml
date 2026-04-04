@@ -34,6 +34,21 @@ ColumnLayout {
     checked: Config.bar.floating
     onCheckedChanged: Config.bar.floating = checked
   }
-
-
+  Dropdown {
+    Layout.fillWidth: true
+    label: "theme"
+    options: ["top", "side"]
+    currentIndex: options.indexOf(Config.bar.pos)
+    onCurrentIndexChanged: {
+      Config.bar.pos = options[currentIndex]
+    }
+  }
+  Slider {
+    label: "arc size"
+    from: 0
+    to: 40
+    step: 2
+    value: Config.bar.arc.size
+    onValueChanged: Config.bar.arc.size =  value
+  }
 }

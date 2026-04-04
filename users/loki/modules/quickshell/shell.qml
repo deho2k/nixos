@@ -1,21 +1,27 @@
 import Quickshell
 import QtQuick
+import qs.config
 import qs.modules.bars.side
 import qs.modules.bars.top
+import qs.modules.frame
+
+ShellRoot{
+  id:shellRoot
+  Handler {}
+
+
+
+  Frame {id: frame}
+  Loader {source:"modules/bars/"+ Config.bar.pos +"/Bar.qml"}
+
+}
 
 // NOTES
-// add a good way to swtich between side and top bar
-// add a nice curve to the side bar 
-// check out qmlformat 
-// learn how to use canvas 
+// make the playerosd come out of the frame nicely intergrated also add animations
+// better bar postioning so it doesnt go -20
+// maybe just launch the music eatch time like the wallpaper picker
+// add a nice workspace icons ts
+// learn how to use canvas
 // add a player to the sidebar
 // add a background for eatch space of the bars
 // wallpaper selector make it so it doesnt scroll eatch time its opened
-ShellRoot{
-  id:shellRoot
-  // handler has everything that isnt static such as any ipcHandlers, osd or launcher
-  Handler {}
-
-  property string barType: "side"
-  Loader {source:"modules/bars/"+ shellRoot.barType +"/Bar.qml"}
-}

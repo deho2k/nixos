@@ -10,10 +10,14 @@ import "json"
 Singleton {
   id: root
 
+  JsonReader {id: cfg}
+  property alias bar: cfg.bar
+  property alias theme: cfg.theme
+  property alias hyprland: cfg.hyprland
+  property alias frame: cfg.frame
+
   // !! folder where u save ur matugen themes json files
   property string matugenThemes: "~/.config/matugen/themes/"
-
-  property var battery: UPower.displayDevice
 
   // mpris default chain
   property var player: {
@@ -23,10 +27,8 @@ Singleton {
              (players.length > 0 ? players[0] : null);
   }
 
-  JsonReader {id: cfg}
-  property alias bar: cfg.bar
-  property alias theme: cfg.theme
-  property alias hyprland: cfg.hyprland
+  property var battery: UPower.displayDevice
+
 
   property string barLayout: "side"
 

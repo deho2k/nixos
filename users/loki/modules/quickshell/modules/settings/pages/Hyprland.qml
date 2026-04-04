@@ -13,9 +13,20 @@ ColumnLayout {
   }
 
   Slider {
-    label: "gaps in"
+    label: "rounding"
     from: 0
     to: 32
+    value: Config.hyprland.rounding
+    onValueChanged: {
+      Config.hyprland.rounding = value
+      Config.hyprlandRuntimePush("rounding", value)
+    }
+  }
+  Slider {
+    label: "gaps in"
+    from: 0
+    to: 64
+    step: 2
     value: Config.hyprland.gapsIn
     onValueChanged: {
       Config.hyprland.gapsIn = value
@@ -25,7 +36,8 @@ ColumnLayout {
   Slider {
     label: "gaps out"
     from: 0
-    to: 32
+    to: 64
+    step: 2
     value: Config.hyprland.gapsOut
     onValueChanged: {
       Config.hyprland.gapsOut = value

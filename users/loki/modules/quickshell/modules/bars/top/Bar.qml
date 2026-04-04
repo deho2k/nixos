@@ -14,7 +14,7 @@ Variants {
     property var margins: Config.bar.margins
     screen: modelData
     color: "transparent"
-    implicitHeight: 30
+    implicitHeight: Config.bar.height
     anchors {
       top:true
       left:true

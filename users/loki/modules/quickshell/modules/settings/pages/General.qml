@@ -37,4 +37,25 @@ ColumnLayout {
     value: Config.theme.transitionDuration
     onValueChanged: Config.theme.transitionDuration =  value
   }
+  Text {
+    text: "frame"
+    font.pixelSize: 32
+    font.bold: true 
+    color: Colors.inverse_surface
+  }
+  Slider {
+    label: "radius"
+    from: 0
+    to: 48
+    step: 2
+    value: Config.frame.radius
+    onValueChanged: Config.frame.radius =  value
+  }
+  Slider {
+    label: "width"
+    from: 0
+    to: 16
+    value: Config.frame.width
+    onValueChanged: Config.frame.width =  value
+  }
 }
