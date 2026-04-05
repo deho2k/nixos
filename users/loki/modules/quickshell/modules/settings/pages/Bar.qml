@@ -37,7 +37,7 @@ ColumnLayout {
   Dropdown {
     Layout.fillWidth: true
     label: "theme"
-    options: ["top", "side"]
+    options: ["top", "left"]
     currentIndex: options.indexOf(Config.bar.pos)
     onCurrentIndexChanged: {
       Config.bar.pos = options[currentIndex]

@@ -1,65 +1,95 @@
-import QtQuick.Shapes
 import QtQuick
+import QtQuick.Shapes
 import qs.config
 import Quickshell
-// FIX: make an actuall good approach
-Variants {
-  id: root
-  model: Quickshell.screens
-  PanelWindow {
-    id: frame
-    required property var modelData
-    screen: modelData
-    anchors {
-      top: true
-      bottom: true
-      left: true
-      right: true
-    }
-    color: "transparent"
-    mask: Region{}
 
-    property bool isSide: Config.bar.pos == "side"
-    property int lineWidth: Config.frame.width
-    property int radius: Config.frame.radius
-    property int width: isSide? screen.width - Config.bar.width : screen.width
-    property int height: isSide? screen.height : screen.height - Config.bar.height
+Scope {
 
-    Shape {
-      antialiasing: true
-      ShapePath {
-        fillColor: Colors.background
-        strokeWidth: 0
+  // ── Visual frame (rounded border shape) ──────────────────────
+  Variants {
+    model: Quickshell.screens
+    PanelWindow {
+      id: frame
+      required property var modelData
+      screen: modelData
+      visible: Config.frame.enabled
+      exclusionMode: ExclusionMode.Ignore
+      anchors { top: true; bottom: true; left: true; right: true }
+      color: "transparent"
+      mask: Region {}
 
-        PathRectangle {
-          width: frame.width
-          height: frame.height
+      // Avoid shadowing built-in width/height — use explicit names
+      readonly property bool  isSide    : Config.bar.pos === "left"
+      readonly property int   lw        : Config.frame.width          // line width
+      readonly property int   cr        : Config.frame.radius         // corner radius
+      readonly property int   frameW    : isSide ? screen.width  - Config.bar.width  : screen.width
+      readonly property int   frameH    : isSide ? screen.height                     : screen.height - Config.bar.height
+
+      Shape {
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        antialiasing: true
+        ShapePath {
+          fillColor : Colors.background
+          strokeWidth: 0
+          fillRule  : ShapePath.OddEvenFill
+
+          PathRectangle {
+            width : frame.frameW
+            height: frame.frameH
+          }
+          PathRectangle {
+            x     : frame.isSide ? 0        : frame.lw
+            y     : frame.isSide ? frame.lw : 0
+            width : frame.isSide ? frame.frameW - frame.lw       : frame.frameW - frame.lw * 2
+            height: frame.isSide ? frame.frameH - frame.lw * 2  : frame.frameH - frame.lw
+            radius: Math.max(0, frame.cr - frame.lw)
+          }
         }
-
-        PathRectangle {
-          x: frame.isSide? 0 : frame.lineWidth
-          y: frame.isSide? frame.lineWidth : 0
-          width: frame.isSide? frame.width - frame.lineWidth: frame.width - frame.lineWidth * 2
-          height: frame.isSide? frame.height - frame.lineWidth * 2 : frame.height - frame.lineWidth
-          radius: Math.max(0, frame.radius - frame.lineWidth)
-        }
-
-        fillRule: ShapePath.OddEvenFill
       }
-      //FIX ME: make a better shadow effect
-      //ShapePath {
-      //  fillColor: "transparent"
-      //  strokeWidth: 2
-      //  strokeColor: Colors.shadow
-      //  PathRectangle {
-      //    x: 1
-      //    y: frame.lineWidth
-      //    width: frame.width - frame.lineWidth
-      //    height: frame.height - frame.lineWidth * 2
-      //    radius: Math.max(0, frame.radius - frame.lineWidth)
-      //  }
-      //  fillRule: ShapePath.OddEvenFill
-      //}
+    }
+  }
+
+  // ── Hyprland margin windows (one Variants block, one delegate) ──
+  //
+  // Each PanelWindow reserves exactly one edge worth of strut space.
+  // They're invisible (transparent + no content) — their only job
+  // is to push Hyprland's usable-area inward by `frame.width` px.
+  //
+  // Condition logic:  hide the edge that the bar already occupies,
+  // since the bar's own PanelWindow already claims that strut.
+  Variants {
+    model: Quickshell.screens
+
+    Item {
+      required property var modelData
+
+      component EdgePanel: PanelWindow {
+        screen: modelData
+        visible: Config.frame.enabled
+        color: "transparent"
+      }
+
+      EdgePanel {
+        visible: Config.frame.enabled && Config.bar.pos !== "top"
+        anchors { top: true; left: true; right: true }
+        implicitHeight: Config.frame.width
+      }
+      EdgePanel {
+        visible: Config.frame.enabled && Config.bar.pos !== "bottom"
+        anchors { bottom: true; left: true; right: true }
+        implicitHeight: Config.frame.width
+      }
+      EdgePanel {
+        visible: Config.frame.enabled && Config.bar.pos !== "left"
+        anchors { left: true; top: true; bottom: true }
+        implicitWidth: Config.frame.width
+      }
+      EdgePanel {
+        visible: Config.frame.enabled && Config.bar.pos !== "right"
+        anchors { right: true; top: true; bottom: true }
+        implicitWidth: Config.frame.width
+      }
     }
   }
 }

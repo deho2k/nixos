@@ -10,10 +10,18 @@ Rectangle {
     color: "transparent" 
 
     property int percentage: 0
+    property int lineWidth: 10
+    property int margin: 5
     property string icon: ""
     property color backgroundColor: Colors.outline 
     property color progressColor: Colors.secondary
 
+    Connections {
+        target: root
+        function onPercentageChanged() { 
+            progressCanvas.requestPaint(); 
+        }
+    }
     Canvas {
         id: progressCanvas
         anchors.fill: parent
@@ -26,8 +34,8 @@ Rectangle {
             var centerX = width / 2;
             var centerY = height / 2;
 
-            var lineWidth = 8; 
-            var radius = (Math.min(width, height) / 2) - (lineWidth / 2) - 5;
+            var lineWidth = root.lineWidth;
+            var radius = (Math.min(width, height) / 2) - (lineWidth / 2) - root.margin
             
             var startAngle = -Math.PI / 2; 
             var endAngle = startAngle + (2 * Math.PI * (root.percentage / 100));
@@ -46,12 +54,6 @@ Rectangle {
             ctx.stroke();
         }
 
-        Connections {
-            target: root
-            function onPercentageChanged() { 
-                progressCanvas.requestPaint(); 
-            }
-        }
     }
     StyledText {
       text: root.icon

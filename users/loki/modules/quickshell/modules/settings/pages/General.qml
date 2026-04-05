@@ -12,7 +12,6 @@ ColumnLayout {
     color: Colors.inverse_surface
   }
 
-
   Dropdown {
     Layout.fillWidth: true
     label: "Theme"
@@ -42,6 +41,11 @@ ColumnLayout {
     font.pixelSize: 32
     font.bold: true 
     color: Colors.inverse_surface
+  }
+  Switch {
+    label:"enabled"
+    checked: Config.frame.enabled
+    onCheckedChanged: Config.frame.enabled = checked
   }
   Slider {
     label: "radius"

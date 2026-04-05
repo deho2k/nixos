@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Widgets
 import qs.config
 import qs.widgets
+import QtQuick.Shapes
 
 PanelWindow {
   id: playerOsd
@@ -18,12 +19,57 @@ PanelWindow {
 
   exclusionMode: ExclusionMode.Normal
   implicitWidth: 400
-  implicitHeight: 150
+  implicitHeight: 150 + arcTop.height + arcBottom.height
   color: "transparent"
-  mask: Region {}
 
+  property int aw: 30
+  property int ah: 40
+  mask: Region {}
+  Shape {
+    id: arcTop
+    width: playerOsd.aw
+    height: playerOsd.ah
+    anchors.bottom: root.top
+    anchors.left: root.left
+
+    ShapePath {
+      fillColor: Colors.background
+      strokeColor: "transparent"
+
+      startX: 0; startY: playerOsd.ah
+      PathLine { x: 0; y: 0 }
+      PathArc {
+        x: playerOsd.aw; y: playerOsd.ah
+        radiusX: playerOsd.aw; radiusY: playerOsd.ah
+        direction: PathArc.Counterclockwise
+      }
+    }
+  }
+  Shape {
+    id: arcBottom
+    width: playerOsd.aw
+    height: playerOsd.ah
+    anchors.top: root.bottom
+    anchors.left: root.left
+
+    ShapePath {
+      fillColor: Colors.background
+      strokeColor: "transparent"
+
+      startX: 0; startY: 0
+      PathLine { x: playerOsd.aw; y: 0 }
+      PathArc {
+        x: 0; y: playerOsd.ah
+        radiusX: playerOsd.aw; radiusY: playerOsd.ah
+        direction: PathArc.Counterclockwise
+      }
+    }
+  }
   RowLayout {
+    id: root
     anchors.fill: parent
+    anchors.topMargin: arcTop.height
+    anchors.bottomMargin: arcBottom.height
     // music
     Rectangle {
       Layout.fillWidth: true

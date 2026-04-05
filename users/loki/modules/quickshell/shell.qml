@@ -1,19 +1,14 @@
 import Quickshell
 import QtQuick
-import qs.config
-import qs.modules.bars.side
-import qs.modules.bars.top
+import qs.modules.bars
 import qs.modules.frame
 
 ShellRoot{
   id:shellRoot
   Handler {}
 
-
-
+  Bar{}
   Frame {id: frame}
-  Loader {source:"modules/bars/"+ Config.bar.pos +"/Bar.qml"}
-
 }
 
 // NOTES

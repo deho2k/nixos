@@ -3,18 +3,19 @@
         "floating": false,
         "height": 30,
         "margins": 0,
-        "pos": "side",
+        "pos": "top",
         "radius": 11,
         "width": 45
     },
     "frame": {
-        "radius": 48,
-        "width": 16
+        "enabled": true,
+        "radius": 22,
+        "width": 6
     },
     "hyprland": {
-        "gapsIn": 8,
-        "gapsOut": 31,
-        "rounding": 4
+        "gapsIn": 10,
+        "gapsOut": 10,
+        "rounding": 20
     },
     "theme": {
         "theme": "wallpaper",
