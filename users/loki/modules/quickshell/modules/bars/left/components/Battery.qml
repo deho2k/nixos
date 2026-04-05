@@ -4,6 +4,7 @@ import qs.config
 
 Background {
   CircleProgress {
+    anchors.centerIn: parent
     property string batteryIcon: {
       let pct = Config.battery.percentage
 

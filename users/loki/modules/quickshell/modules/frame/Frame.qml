@@ -12,7 +12,7 @@ Scope {
       id: frame
       required property var modelData
       screen: modelData
-      visible: Config.frame.enabled
+      visible: Config.frameVisible
       exclusionMode: ExclusionMode.Ignore
       anchors { top: true; bottom: true; left: true; right: true }
       color: "transparent"
@@ -20,8 +20,8 @@ Scope {
 
       // Avoid shadowing built-in width/height — use explicit names
       readonly property bool  isSide    : Config.bar.pos === "left"
-      readonly property int   lw        : Config.frame.width          // line width
-      readonly property int   cr        : Config.frame.radius         // corner radius
+      readonly property int   lw        : Config.frame.width
+      readonly property int   cr        : Config.frame.radius
       readonly property int   frameW    : isSide ? screen.width  - Config.bar.width  : screen.width
       readonly property int   frameH    : isSide ? screen.height                     : screen.height - Config.bar.height
 
@@ -41,9 +41,12 @@ Scope {
           PathRectangle {
             x     : frame.isSide ? 0        : frame.lw
             y     : frame.isSide ? frame.lw : 0
-            width : frame.isSide ? frame.frameW - frame.lw       : frame.frameW - frame.lw * 2
+            width : frame.isSide ? frame.frameW - frame.lw       : frame.frameW - frame.lw * 2 
             height: frame.isSide ? frame.frameH - frame.lw * 2  : frame.frameH - frame.lw
-            radius: Math.max(0, frame.cr - frame.lw)
+            topLeftRadius: frame.cr
+            topRightRadius: frame.isSide? frame.lw == 0? 0 : frame.cr : frame.cr
+            bottomLeftRadius: frame.isSide?  frame.cr: frame.lw == 0? 0 : frame.cr
+            bottomRightRadius: frame.lw == 0? 0 : frame.cr
           }
         }
       }
@@ -66,27 +69,27 @@ Scope {
 
       component EdgePanel: PanelWindow {
         screen: modelData
-        visible: Config.frame.enabled
+        visible: Config.frameVisible
         color: "transparent"
       }
 
       EdgePanel {
-        visible: Config.frame.enabled && Config.bar.pos !== "top"
+        visible: Config.frameVisible && Config.bar.pos !== "top"
         anchors { top: true; left: true; right: true }
         implicitHeight: Config.frame.width
       }
       EdgePanel {
-        visible: Config.frame.enabled && Config.bar.pos !== "bottom"
+        visible: Config.frameVisible && Config.bar.pos !== "bottom"
         anchors { bottom: true; left: true; right: true }
         implicitHeight: Config.frame.width
       }
       EdgePanel {
-        visible: Config.frame.enabled && Config.bar.pos !== "left"
+        visible: Config.frameVisible && Config.bar.pos !== "left"
         anchors { left: true; top: true; bottom: true }
         implicitWidth: Config.frame.width
       }
       EdgePanel {
-        visible: Config.frame.enabled && Config.bar.pos !== "right"
+        visible: Config.frameVisible && Config.bar.pos !== "right"
         anchors { right: true; top: true; bottom: true }
         implicitWidth: Config.frame.width
       }

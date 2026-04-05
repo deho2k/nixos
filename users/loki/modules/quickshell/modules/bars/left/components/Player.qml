@@ -13,12 +13,10 @@ Background {
     interval: 3000
     running: true
     repeat: true
-    onTriggered: {
-      root.perc = Config.player.position / Config.player.length * 100
-
-    }
+    onTriggered: { root.perc = Config.player.position / Config.player.length * 100 }
   }
   CircleProgress {
+    anchors.centerIn: parent
     percentage: root.perc
     icon: Config.player.isPlaying ? "" : ""
     lineWidth: 5

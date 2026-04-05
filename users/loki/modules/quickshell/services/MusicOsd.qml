@@ -6,6 +6,7 @@ import Quickshell.Widgets
 import qs.config
 import qs.widgets
 import QtQuick.Shapes
+import Quickshell.Wayland 
 
 PanelWindow {
   id: playerOsd
@@ -13,17 +14,23 @@ PanelWindow {
   property int radius: 12
   anchors.left: true
   anchors.top: true
-
-  margins.top: 80
-  margins.left: Config.frame.enabled?  0: 60
+  margins.top: 100
+  margins.left: 0
+  Component.onCompleted: {
+    if (this.WlrLayershell != null) {
+      //used to set custom animation in the hyprlnad config check
+      // hyprland/rules.conf
+      this.WlrLayershell.namespace = "qs-music-osd"
+    }
+  }
 
   exclusionMode: ExclusionMode.Normal
   implicitWidth: 400
   implicitHeight: 150 + arcTop.height + arcBottom.height
   color: "transparent"
 
-  property int aw: 30
-  property int ah: 40
+  property int aw: 20
+  property int ah: 30
   mask: Region {}
   Shape {
     id: arcTop
@@ -76,8 +83,7 @@ PanelWindow {
       Layout.fillHeight: true
       implicitWidth: 15
       radius: playerOsd.radius
-      bottomLeftRadius: Config.frame.enabled? 0 : playerOsd.radius
-      topLeftRadius: Config.frame.enabled? 0 : playerOsd.radius
+      bottomLeftRadius: 0; topLeftRadius: 0
       color: Colors.background
 
       RowLayout {

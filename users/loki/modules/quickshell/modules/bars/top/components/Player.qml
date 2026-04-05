@@ -5,12 +5,26 @@ import qs.widgets
 
 Background{
   visible: Config.player
+  id: root
+  property int perc: Config.player 
+      ? (Config.player.position / Config.player.length * 100) 
+      : 0
+
+  Timer {
+    interval: 3000
+    running: true
+    repeat: true
+    onTriggered: { root.perc = Config.player.position / Config.player.length * 100 }
+  }
   RowLayout {
+    id: layout
     spacing: 5
     anchors.centerIn: parent
-    StyledText {
-      id:icon
-      text: Config.player ? Config.player.identity == "Spotify"? "": "󰎆" : ""
+    CircleProgress {
+      percentage: root.perc
+      icon: Config.player ? Config.player.identity == "Spotify"? "": "󰎆" : ""
+      lineWidth: 3
+      margin: 12
     }
     StyledText {
       id: tracktitle

@@ -1,6 +1,8 @@
 import Quickshell
+import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Shapes
 import qs.config
 import "components"
 
@@ -8,13 +10,20 @@ PanelWindow {
   id: root
   required property var model
   implicitHeight: 600
-  implicitWidth: 550
+  implicitWidth: 550 + arcRight.width + arcLeft.width
   focusable: true
   color: "transparent"
   onVisibleChanged: search.text = ""
   exclusionMode: ExclusionMode.Normal
+  Component.onCompleted: {
+    if (this.WlrLayershell != null) {
+      //used to set custom animation in the hyprlnad config check
+      // hyprland/rules.conf
+      this.WlrLayershell.namespace = "qs-launcher"
+    }
+  }
   anchors {
-    left:false
+    bottom: true
   }
 
   function filterApps(query) {
@@ -33,15 +42,56 @@ PanelWindow {
     model = results;
     list.currentIndex = 0;
   }
-  Arc {
-    anchors.bottom: parent.top
-    anchors.left: parent.left
+  property int aw: 40
+  property int ah: 40
+  Shape {
+    id: arcRight
+    width: root.aw
+    height: root.ah
+    anchors.bottom: panel.bottom
+    anchors.left: panel.right
+
+    ShapePath {
+      fillColor: Colors.background
+      strokeColor: "transparent"
+
+      startX: 0; startY: root.ah
+      PathLine { x: 0; y: 0 }
+      PathArc {
+        x: root.aw; y: root.ah
+        radiusX: root.aw; radiusY: root.ah
+        direction: PathArc.Counterclockwise
+      }
+    }
+  }
+  Shape {
+    id: arcLeft
+    width: root.aw
+    height: root.ah
+    anchors.bottom: panel.bottom
+    anchors.right: panel.left
+
+    ShapePath {
+      fillColor: Colors.background
+      strokeColor: "transparent"
+
+      startX: root.aw; startY: root.ah
+      PathLine { x: root.aw; y: 0 }
+      PathArc {
+        x: 0; y: root.ah
+        radiusX: root.aw; radiusY: root.ah
+        direction: PathArc.Clockwise
+      }
+    }
   }
   Rectangle {
+    id: panel
     color: Colors.surface
-    anchors.margins: 40
+    anchors.rightMargin: arcRight.width
+    anchors.leftMargin: arcLeft.width
     anchors.fill: parent
-    radius: 12
+    radius: 24
+    bottomLeftRadius: 0; bottomRightRadius: 0
     height: parent.height
     width: parent.width
 

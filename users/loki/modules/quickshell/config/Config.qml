@@ -31,18 +31,24 @@ Singleton {
   property alias theme: adapter.theme
   property alias hyprland: adapter.hyprland
   property alias frame: adapter.frame
+  property bool frameVisible: !bar.floating && bar.margins <= 0 
   FileView {
     path: Quickshell.env("HOME") + "/.config/quickshell/config/json/settings.json"
     watchChanges: true
     onFileChanged: reload()
     onAdapterUpdated: writeAdapter()
 
+    //======================================================
+    //======================================================
+    //||IMPORTANT DONT CHANGE VARIABLES FOR SETTINGS HERE ||
+    //||CHANGE THEM IN json/settings.json IN THE DIREOTORY||
+    //======================================================
+    //======================================================
     JsonAdapter {
       id: adapter
       property JsonObject frame: JsonObject {
-        property bool enabled: false
-        property int width: 10
-        property int radius: 10
+        property int width: 0
+        property int radius: 0
       }
       property JsonObject bar: JsonObject {
         property int width: 45 // for the side bar

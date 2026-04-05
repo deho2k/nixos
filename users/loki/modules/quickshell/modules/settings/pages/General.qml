@@ -42,15 +42,10 @@ ColumnLayout {
     font.bold: true 
     color: Colors.inverse_surface
   }
-  Switch {
-    label:"enabled"
-    checked: Config.frame.enabled
-    onCheckedChanged: Config.frame.enabled = checked
-  }
   Slider {
     label: "radius"
     from: 0
-    to: 48
+    to: 32
     step: 2
     value: Config.frame.radius
     onValueChanged: Config.frame.radius =  value
@@ -58,7 +53,7 @@ ColumnLayout {
   Slider {
     label: "width"
     from: 0
-    to: 16
+    to: 24
     value: Config.frame.width
     onValueChanged: Config.frame.width =  value
   }

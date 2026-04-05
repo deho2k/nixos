@@ -4,9 +4,7 @@ import qs.widgets
 import qs.config
 
 Background{
-  StyledText {
-    id: battery
-    anchors.centerIn: parent
+  CircleProgress {
     property string batteryIcon: {
       let pct = Config.battery.percentage
 
@@ -19,6 +17,16 @@ Background{
       else if (pct >= 0.1) return " 󰁼"
       else return " 󰂎"
     }
-    text: batteryIcon + " "+ Config.battery.percentage * 100
+    percentage: Config.battery.percentage * 100
+    icon: batteryIcon
+    lineWidth: 3
+    margin: 10
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.right: battery.left
+  }
+  StyledText {
+    id: battery
+    anchors.centerIn: parent
+    text: Config.battery.percentage * 100
   }
 }
