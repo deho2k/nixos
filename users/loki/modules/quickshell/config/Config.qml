@@ -92,7 +92,7 @@ Singleton {
   property int cpuUsage
   Process {
     id: cpuProc
-    command: ["sh", "-c", `top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4}'`]
+    command: ["sh", "-c", "awk 'NR==1{idle=$5; total=$2+$3+$4+$5+$6+$7+$8; print int((1-idle/total)*100)}' /proc/stat"]
     stdout: SplitParser {
       onRead: data => {
         if (!data) return

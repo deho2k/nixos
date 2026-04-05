@@ -5,7 +5,9 @@ import qs.config
 
 Background {
   id: root
-  property int perc: Config.player.position / Config.player.length * 100
+  property int perc: Config.player 
+      ? (Config.player.position / Config.player.length * 100) 
+      : 0
 
   Timer {
     interval: 3000

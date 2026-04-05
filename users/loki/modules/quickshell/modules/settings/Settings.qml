@@ -6,7 +6,7 @@ import QtQuick.Layouts
 import Quickshell
 import qs.config
 // needed to be imported for pages to be able to use them for some reason
-import "./componenets"
+import "./componenents"
 
 FloatingWindow {
   id: root

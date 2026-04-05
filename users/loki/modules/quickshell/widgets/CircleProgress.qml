@@ -16,12 +16,7 @@ Rectangle {
     property color backgroundColor: Colors.outline 
     property color progressColor: Colors.secondary
 
-    Connections {
-        target: root
-        function onPercentageChanged() { 
-            progressCanvas.requestPaint(); 
-        }
-    }
+    onPercentageChanged: progressCanvas.requestPaint()
     Canvas {
         id: progressCanvas
         anchors.fill: parent

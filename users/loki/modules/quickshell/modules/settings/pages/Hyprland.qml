@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.config
-import "../componenets"
+import "../componenents"
 
 ColumnLayout {
   spacing: 16

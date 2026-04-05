@@ -2,7 +2,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import qs.config
-import "componets"
+import "components"
 
 PanelWindow {
   id: root
