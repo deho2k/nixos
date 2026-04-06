@@ -145,7 +145,7 @@ require("telescope").setup({})
 
 local pickers = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", pickers.find_files, { desc = "[F]ind [F]iles", })
-vim.keymap.set("n", "<leader>fg", pickers.grep_string, { desc = "[F]ind [W]ord", })
+vim.keymap.set("n", "<leader>fg", pickers.live_grep, { desc = "[F]ind [W]ord", })
 
 -- vim.pack.update()
 

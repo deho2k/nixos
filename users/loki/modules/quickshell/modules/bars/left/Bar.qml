@@ -21,8 +21,10 @@ Rectangle {
   ColumnLayout {
     anchors.fill: parent
 
+    spacing: 50
     Date {
       id: clock
+      Layout.topMargin: 40
       Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
     }
     Player {
@@ -50,6 +52,7 @@ Rectangle {
     }
     Cpu {
       id: cpu
+      Layout.bottomMargin: 40
       Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
     }
   }

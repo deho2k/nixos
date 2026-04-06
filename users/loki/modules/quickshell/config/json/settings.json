@@ -2,19 +2,19 @@
     "bar": {
         "floating": false,
         "height": 30,
-        "margins": 50,
+        "margins": 0,
         "pos": "left",
         "radius": 11,
         "width": 45
     },
     "frame": {
-        "radius": 12,
-        "width": 0
+        "radius": 18,
+        "width": 4
     },
     "hyprland": {
-        "gapsIn": 10,
-        "gapsOut": 44,
-        "rounding": 20
+        "gapsIn": 4,
+        "gapsOut": 12,
+        "rounding": 12
     },
     "theme": {
         "theme": "wallpaper",

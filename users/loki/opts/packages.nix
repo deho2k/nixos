@@ -22,6 +22,7 @@
     pkgs.fastfetch
     pkgs.playerctl
     pkgs.zip
+    pkgs.obs-studio
 
 #neovim
     pkgs.ripgrep

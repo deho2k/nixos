@@ -12,78 +12,75 @@ PanelWindow {
   id: playerOsd
   property int volumePerc: 50
   property int radius: 12
-  anchors.left: true
   anchors.top: true
-  margins.top: 100
-  margins.left: 0
   Component.onCompleted: {
     if (this.WlrLayershell != null) {
       //used to set custom animation in the hyprlnad config check
       // hyprland/rules.conf
-      this.WlrLayershell.namespace = "qs-music-osd"
+      this.WlrLayershell.namespace = "qs-slide-top"
     }
   }
 
   exclusionMode: ExclusionMode.Normal
-  implicitWidth: 400
-  implicitHeight: 150 + arcTop.height + arcBottom.height
+  implicitWidth: 400 + arcLeft.height + arcRight.height
+  implicitHeight: 180
   color: "transparent"
 
   property int aw: 20
   property int ah: 30
   mask: Region {}
   Shape {
-    id: arcTop
+    id: arcRight
     width: playerOsd.aw
     height: playerOsd.ah
-    anchors.bottom: root.top
-    anchors.left: root.left
-
-    ShapePath {
-      fillColor: Colors.background
-      strokeColor: "transparent"
-
-      startX: 0; startY: playerOsd.ah
-      PathLine { x: 0; y: 0 }
-      PathArc {
-        x: playerOsd.aw; y: playerOsd.ah
-        radiusX: playerOsd.aw; radiusY: playerOsd.ah
-        direction: PathArc.Counterclockwise
-      }
-    }
-  }
-  Shape {
-    id: arcBottom
-    width: playerOsd.aw
-    height: playerOsd.ah
-    anchors.top: root.bottom
-    anchors.left: root.left
+    anchors.left: root.right
+    anchors.top: root.top
 
     ShapePath {
       fillColor: Colors.background
       strokeColor: "transparent"
 
       startX: 0; startY: 0
-      PathLine { x: playerOsd.aw; y: 0 }
+      PathLine { x: 0; y: playerOsd.ah }
       PathArc {
-        x: 0; y: playerOsd.ah
+        x: playerOsd.aw; y: 0
         radiusX: playerOsd.aw; radiusY: playerOsd.ah
-        direction: PathArc.Counterclockwise
+        direction: PathArc.Clockwise
       }
     }
   }
-  RowLayout {
+  Shape {
+    id: arcLeft
+    width: playerOsd.aw
+    height: playerOsd.ah
+    anchors.right: root.left
+    anchors.top: root.top
+
+    ShapePath {
+      fillColor: Colors.background
+      strokeColor: "transparent"
+
+      startX: playerOsd.aw; startY: 0
+      PathLine { x: 0; y: 0 }
+      PathArc {
+        x: playerOsd.aw; y: playerOsd.ah
+        radiusX: playerOsd.aw; radiusY: playerOsd.ah
+        direction: PathArc.Clockwise
+      }
+    }
+  }
+  ColumnLayout {
     id: root
     anchors.fill: parent
-    anchors.topMargin: arcTop.height
-    anchors.bottomMargin: arcBottom.height
+    anchors.leftMargin: arcLeft.width
+    anchors.rightMargin: arcRight.width
     // music
     Rectangle {
       Layout.fillWidth: true
       Layout.fillHeight: true
-      implicitWidth: 15
+      implicitHeight: 150
       radius: playerOsd.radius
-      bottomLeftRadius: 0; topLeftRadius: 0
+      topLeftRadius: 0; topRightRadius: 0
       color: Colors.background
 
       RowLayout {
@@ -153,10 +150,10 @@ PanelWindow {
     // volume
     Rectangle {
       color: Colors.background
-      implicitWidth: 1
+      implicitHeight: 24
       Layout.fillWidth: true
       Layout.fillHeight: true
-      radius: 8
+      radius: 12
 
       Rectangle {
         width: 15
@@ -168,12 +165,12 @@ PanelWindow {
         Rectangle {
           anchors {
             left: parent.left
-            right: parent.right
+            top: parent.top
             bottom: parent.bottom
           }
           color: Colors.outline
 
-          implicitHeight: parent.height * playerOsd.volumePerc / 100
+          implicitWidth: parent.width * playerOsd.volumePerc / 100
           radius: parent.radius
         }
       }

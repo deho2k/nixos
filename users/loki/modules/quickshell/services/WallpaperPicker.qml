@@ -9,7 +9,13 @@ import Qt.labs.folderlistmodel
 PanelWindow {
   // !! IMPORTANT !! set the path for ur wallpaper
   property string wallpapersPath: "/.config/walls/Wallpapers"
-
+  Component.onCompleted: {
+    if (this.WlrLayershell != null) {
+      //used to set custom animation in the hyprlnad config check
+      // hyprland/rules.conf
+      this.WlrLayershell.namespace = "qs-slide-left"
+    }
+  }
   id: window
   exclusionMode: ExclusionMode.Ignore
   focusable: true

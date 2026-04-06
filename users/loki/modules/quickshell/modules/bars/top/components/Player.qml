@@ -21,6 +21,12 @@ Background{
     spacing: 5
     anchors.centerIn: parent
     CircleProgress {
+      MouseArea {
+        anchors.fill: parent
+        onClicked: {
+          Config.player.togglePlaying()
+        }
+      }
       percentage: root.perc
       icon: Config.player ? Config.player.identity == "Spotify"? "": "󰎆" : ""
       lineWidth: 3

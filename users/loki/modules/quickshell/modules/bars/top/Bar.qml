@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import Quickshell
 import QtQuick
+import QtQuick.Layouts
 import qs.config
 import "components"
 
@@ -16,29 +17,35 @@ Rectangle {
   anchors.topMargin: margins > 0? 5: 0
   radius: margins > 0? Config.bar.radius: 0
 
-  Clock {
-    id: clock
-    anchors.left: parent.left
-  }
-  Player {
-    id: spotify
-    anchors.left: clock.right
-  }
-  Workspaces {
-    id: workspaces
-    anchors.centerIn: parent
-  }
-  Battery {
-    visible: Config.battery.percentage != 0
-    id:battery
-    anchors.right: ram.left
-  }
-  Ram {
-    id: ram
-    anchors.right: cpu.left
-  }
-  Cpu{
-    id: cpu
-    anchors.right: parent.right
+  RowLayout {
+    anchors.fill: parent
+    spacing: 20
+    Clock {
+      id: clock
+      Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+    }
+    Player {
+      id: spotify
+      Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+    }
+    Item { Layout.fillWidth: true }
+    Workspaces {
+      id: workspaces
+      Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+    }
+    Item { Layout.fillWidth: true }
+    Battery {
+      visible: Config.battery.percentage != 0
+      id:battery
+      Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+    }
+    Ram {
+      id: ram
+      Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+    }
+    Cpu{
+      id: cpu
+      Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+    }
   }
 }

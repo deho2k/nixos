@@ -1,5 +1,6 @@
 import Quickshell
 import QtQuick
+import qs.services
 import qs.modules.bars
 import qs.modules.frame
 
@@ -9,11 +10,11 @@ ShellRoot{
 
   Bar{}
   Frame {id: frame}
+  HyprSubmap {}
 }
 
 // NOTES
 // better bar postioning so it doesnt go -20
-// maybe just launch the music eatch time like the wallpaper picker
 // add a nice workspace icons ts
 // add a player to the sidebar
 // add a background for eatch space of the bars

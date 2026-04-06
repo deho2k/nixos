@@ -19,7 +19,7 @@ PanelWindow {
     if (this.WlrLayershell != null) {
       //used to set custom animation in the hyprlnad config check
       // hyprland/rules.conf
-      this.WlrLayershell.namespace = "qs-launcher"
+      this.WlrLayershell.namespace = "qs-slide-bottom"
     }
   }
   anchors {
@@ -86,7 +86,7 @@ PanelWindow {
   }
   Rectangle {
     id: panel
-    color: Colors.surface
+    color: Colors.background
     anchors.rightMargin: arcRight.width
     anchors.leftMargin: arcLeft.width
     anchors.fill: parent
