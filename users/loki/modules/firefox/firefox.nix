@@ -33,10 +33,7 @@
       };
     };
     profiles.default = { 
-      userChrome = builtins.concatStringsSep "\n" [
-        (builtins.readFile ./userChrome.css)
-          (builtins.readFile ./userContent.css)
-      ];
+      userChrome = builtins.concatStringsSep "\n" [ (builtins.readFile ./userChrome.css) ];
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "layers.acceleration.force-enabled" = true;
@@ -52,6 +49,5 @@
         default = "ddg";
       };
     };
-
   };
 }

@@ -55,6 +55,7 @@ Singleton {
         property int height: 20 // for the top bar
         property int margins: 8
         property int radius: 8
+        property bool workspaceIcons: false
         property bool floating: true
         property string pos: "side"
       }

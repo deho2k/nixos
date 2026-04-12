@@ -11,6 +11,7 @@ configs = {
   quickshell = "quickshell";
   matugen = "matugen";
   walls = "walls";
+  btop = "btop";
 };
 in
 {

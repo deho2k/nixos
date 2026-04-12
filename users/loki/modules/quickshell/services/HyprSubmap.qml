@@ -160,7 +160,7 @@ PanelWindow {
         height: 52
         color: Colors.background
 
-        // Mod + Key badge
+        // Mod
         Row {
           id: chordBadge
           anchors.left: parent.left

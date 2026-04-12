@@ -5,15 +5,16 @@
         "margins": 0,
         "pos": "left",
         "radius": 11,
-        "width": 45
+        "width": 45,
+        "workspaceIcons": true
     },
     "frame": {
-        "radius": 18,
-        "width": 4
+        "radius": 16,
+        "width": 0
     },
     "hyprland": {
         "gapsIn": 4,
-        "gapsOut": 12,
+        "gapsOut": 6,
         "rounding": 12
     },
     "theme": {

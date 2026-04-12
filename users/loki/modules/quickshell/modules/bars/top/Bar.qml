@@ -17,35 +17,33 @@ Rectangle {
   anchors.topMargin: margins > 0? 5: 0
   radius: margins > 0? Config.bar.radius: 0
 
-  RowLayout {
+  Row {
     anchors.fill: parent
-    spacing: 20
+    spacing: 2
     Clock {
       id: clock
-      Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+      anchors.left: parent.left
     }
     Player {
       id: spotify
-      Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+      anchors.left: clock.right
     }
-    Item { Layout.fillWidth: true }
     Workspaces {
       id: workspaces
-      Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+      anchors.centerIn: parent
     }
-    Item { Layout.fillWidth: true }
     Battery {
-      visible: Config.battery.percentage != 0
       id:battery
-      Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+      visible: Config.battery.percentage != 0
+      anchors.right: ram.left
     }
     Ram {
       id: ram
-      Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+      anchors.right: cpu.left
     }
     Cpu{
       id: cpu
-      Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+      anchors.right: parent.right
     }
   }
 }

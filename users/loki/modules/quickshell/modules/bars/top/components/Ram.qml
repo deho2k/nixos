@@ -7,7 +7,7 @@ Background{
     percentage: Config.memUsage
     icon: ""
     lineWidth: 4
-    margin: 10
+    margin: 12
     anchors.verticalCenter: parent.verticalCenter
     anchors.right: ram.left
   }

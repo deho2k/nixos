@@ -8,14 +8,14 @@ Background {
   ColumnLayout {
     anchors.centerIn: parent
     StyledText {
-        id: clockHours
-        text: Config.timeHours
-        horizontalAlignment: Text.AlignHCenter
+      id: clockHours
+      text: Config.timeHours
+      horizontalAlignment: Text.AlignHCenter
     }
     StyledText {
-        id: clockMinutes
-        text: Config.timeMinutes
-        horizontalAlignment: Text.AlignHCenter
+      id: clockMinutes
+      text: Config.timeMinutes
+      horizontalAlignment: Text.AlignHCenter
     }
   }
 }

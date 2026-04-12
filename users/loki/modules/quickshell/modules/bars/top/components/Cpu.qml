@@ -7,7 +7,7 @@ Background{
     percentage: Config.cpuUsage
     icon: ""
     lineWidth: 3
-    margin: 10
+    margin: 12
     anchors.verticalCenter: parent.verticalCenter
     anchors.right: cpu.left
   }

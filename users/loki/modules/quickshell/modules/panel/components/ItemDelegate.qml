@@ -6,9 +6,8 @@ Rectangle {
   required property var modelData
   width: parent.width
   height: 48
-  radius: 4
   color: ListView.isCurrentItem ? Colors.outline_variant : "transparent"
-
+  radius: 4
   Image {
     id: appIcon
     cache: true
@@ -17,6 +16,7 @@ Rectangle {
     height: 32
     fillMode: Image.PreserveAspectFit
     anchors.left: parent.left
+    anchors.leftMargin: 12
     anchors.verticalCenter: parent.verticalCenter
   }
   StyledText {

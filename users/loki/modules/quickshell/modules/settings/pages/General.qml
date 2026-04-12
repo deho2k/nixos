@@ -4,6 +4,7 @@ import qs.config
 import "../componenents"
 
 ColumnLayout {
+  anchors.fill: parent
   spacing: 16
   Text {
     text: "General"

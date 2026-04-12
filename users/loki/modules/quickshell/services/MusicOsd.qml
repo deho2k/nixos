@@ -22,11 +22,11 @@ PanelWindow {
   }
 
   exclusionMode: ExclusionMode.Normal
-  implicitWidth: 400 + arcLeft.height + arcRight.height
+  implicitWidth: 400 + arcLeft.width + arcRight.width
   implicitHeight: 180
   color: "transparent"
 
-  property int aw: 20
+  property int aw: 40
   property int ah: 30
   mask: Region {}
   Shape {
@@ -97,14 +97,21 @@ PanelWindow {
           Image {
             source: Config.player.trackArtUrl
             fillMode: Image.PreserveAspectCrop
+            StyledText {
+              anchors.centerIn: parent
+              font.pixelSize: 50
+              opacity: 0.6
+              text: Config.player.isPlaying ? "" : ""
+              Layout.alignment: Qt.AlignCenter
+            }
           }
         }
         ColumnLayout {
           StyledText {
             text: Config.player.trackTitle
             font.pixelSize: 20
-            Layout.maximumWidth: playerOsd.width - artImage.width - 40
-            Layout.minimumWidth: 230
+            Layout.maximumWidth: parent.width
+            Layout.minimumWidth: 230 - arcLeft
           }
           StyledText {
             text: Config.player.trackArtist
@@ -116,7 +123,6 @@ PanelWindow {
           ProgressBar {
             id: pb
             Layout.fillWidth: true
-            Layout.rightMargin: 20
             implicitHeight: 8
             value: Config.player.position
             from: 0
@@ -139,10 +145,6 @@ PanelWindow {
                 color: Colors.outline
               }
             }
-          }
-          StyledText {
-            text: Config.player.isPlaying ? "" : ""
-            Layout.alignment: Qt.AlignCenter
           }
         }
       }

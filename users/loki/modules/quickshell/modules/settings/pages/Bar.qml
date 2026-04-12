@@ -34,6 +34,11 @@ ColumnLayout {
     checked: Config.bar.floating
     onCheckedChanged: Config.bar.floating = checked
   }
+  Switch {
+    label:"icons"
+    checked: Config.bar.workspaceIcons
+    onCheckedChanged: Config.bar.workspaceIcons = checked
+  }
   Dropdown {
     Layout.fillWidth: true
     label: "theme"

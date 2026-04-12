@@ -24,7 +24,7 @@ Background {
     }
     anchors.centerIn: parent
     percentage: root.perc
-    icon: Config.player.isPlaying ? "" : ""
+    icon: Config.player ? Config.player.identity == "Spotify"? "": "󰎆" : ""
     lineWidth: 5
   }
 }

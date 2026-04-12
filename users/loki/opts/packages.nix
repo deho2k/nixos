@@ -9,32 +9,49 @@
   };
   home.packages =  [
     pkgs.quickshell
-    pkgs.matugen
-    pkgs.kitty
-    pkgs.yazi
-    pkgs.dragon-drop
-    pkgs.spotify
-    pkgs.swww
-    pkgs.appimage-run
-    pkgs.wl-clipboard
-    pkgs.jq
-    pkgs.btop
-    pkgs.fastfetch
-    pkgs.playerctl
-    pkgs.zip
-    pkgs.obs-studio
-
+      pkgs.matugen
+      pkgs.kitty
+      pkgs.yazi
+      pkgs.dragon-drop
+      pkgs.spotify
+      pkgs.swww
+      pkgs.appimage-run
+      pkgs.wl-clipboard
+      pkgs.jq
+      pkgs.btop
+      pkgs.fastfetch
+      pkgs.playerctl
+      pkgs.zip
+      pkgs.obs-studio
+      pkgs.pavucontrol
+      pkgs.ncmpcpp
 #neovim
-    pkgs.ripgrep
-    pkgs.lua-language-server
-    pkgs.kdePackages.qtdeclarative
+      pkgs.ripgrep
+      pkgs.lua-language-server
+      pkgs.kdePackages.qtdeclarative
 
 #minecraft server
-    pkgs.jdk17
+      pkgs.jdk17
 #hyprland ecosystem
-    pkgs.hyprshot
-    pkgs.hyprshade
-    pkgs.hyprpicker
-    pkgs.hypridle
+      pkgs.hyprshot
+      pkgs.hyprshade
+      pkgs.hyprpicker
+      pkgs.hypridle
+      ];
+
+  services.mopidy = {
+    enable = true;
+
+    extensionPackages = with pkgs; [
+      mopidy-mpd
     ];
+
+    settings = {
+      mpd = {
+        enabled = true;
+        hostname = "127.0.0.1";
+        port = 6600;
+      };
+    };
+  };
 }

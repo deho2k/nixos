@@ -9,8 +9,8 @@ import "components"
 PanelWindow {
   id: root
   required property var model
-  implicitHeight: 600
-  implicitWidth: 550 + arcRight.width + arcLeft.width
+  implicitHeight: Math.min(480, search.Layout.preferredHeight + launcherContent.spacing + appList.contentHeight + 40)
+  implicitWidth: 500 + arcRight.width + arcLeft.width
   focusable: true
   color: "transparent"
   onVisibleChanged: search.text = ""
@@ -20,6 +20,12 @@ PanelWindow {
       //used to set custom animation in the hyprlnad config check
       // hyprland/rules.conf
       this.WlrLayershell.namespace = "qs-slide-bottom"
+    }
+  }
+  Behavior on implicitHeight {
+    NumberAnimation {
+      duration: 700
+      easing.type: Easing.OutCubic
     }
   }
   anchors {
@@ -40,7 +46,7 @@ PanelWindow {
       }
     }
     model = results;
-    list.currentIndex = 0;
+    appList.currentIndex = 0;
   }
   property int aw: 40
   property int ah: 40
@@ -106,11 +112,12 @@ PanelWindow {
         list:list
         Layout.fillWidth: true
         Layout.preferredHeight:30
-        radius: 1
+        radius: 6
       }
 
       ListView {
-        id: list
+        id: appList
+        height: contentHeight
         Layout.fillWidth: true
         Layout.fillHeight: true
         clip: true

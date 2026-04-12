@@ -15,28 +15,27 @@ Rectangle {
 
   anchors.topMargin: margins
   anchors.bottomMargin: margins
-  anchors.leftMargin: margins > 0? 5: 0
+  anchors.leftMargin: margins > 0? Math.min( Config.hyprland.gapsOut, 5) : 0
   radius: margins > 0 ? Config.bar.radius : 0
 
   ColumnLayout {
     anchors.fill: parent
 
-    spacing: 50
+    spacing: 12
     Date {
       id: clock
-      Layout.topMargin: 40
-      Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+      Layout.alignment: Qt.AlignHCenter
     }
     Player {
       id: player
-      Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
+      Layout.alignment: Qt.AlignHCenter
     }
 
     Item { Layout.fillHeight: true }
 
     Workspaces {
       id: workspaces
-      Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+      Layout.alignment: Qt.AlignHCenter
     }
 
     Item { Layout.fillHeight: true }
@@ -44,16 +43,15 @@ Rectangle {
     Battery {
       visible: Config.battery.percentage != 0
       id: battery
-      Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
+      Layout.alignment: Qt.AlignHCenter
     }
     Ram {
       id: ram
-      Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
+      Layout.alignment: Qt.AlignHCenter
     }
     Cpu {
       id: cpu
-      Layout.bottomMargin: 40
-      Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
+      Layout.alignment: Qt.AlignHCenter
     }
   }
 }
