@@ -1,0 +1,59 @@
+:root {
+  /* This controls the width of the URL bar on the right */
+  --urlbar-width: 35vw; 
+}
+
+/* =========================================================
+   1. TABS (LEFT) AND URL BAR (RIGHT)
+   ========================================================= */
+
+/* Constrain the tab bar to make room on the right */
+#TabsToolbar {
+  margin-right: var(--urlbar-width) !important;
+}
+
+/* Pull the URL bar up into the tab row and anchor it to the right */
+#nav-bar {
+  /* Pull it up to the top row */
+  margin-top: calc(-1 * var(--tab-min-height) - 2 * var(--tab-block-margin, 4px)) !important;
+  
+  /* Anchor to the right side */
+  margin-left: calc(100vw - var(--urlbar-width)) !important;
+  width: var(--urlbar-width) !important;
+  
+  background: transparent !important;
+  box-shadow: none !important;
+  border-top: none !important;
+}
+
+/* Ensure the URL container doesn't overflow */
+#urlbar-container {
+  min-width: 0 !important;
+  width: auto !important;
+}
+
+/* Fix for Window Controls (Minimize/Maximize/Close) 
+   Note: This might overlap the URL bar if it's too wide. 
+   Adjust --urlbar-width if they clash. */
+.titlebar-buttonbox-container {
+  z-index: 101 !important;
+}
+
+/* =========================================================
+   2. KEYBOARD FOCUSED (HIDING BUTTONS)
+   ========================================================= */
+
+/* Hide New Tab button */
+#tabs-newtab-button, #new-tab-button {
+  display: none !important;
+}
+
+/* Hide Close buttons on tabs */
+.tab-close-button {
+  display: none !important;
+}
+
+/* Hide 'List all tabs' and other clutter */
+#alltabs-button, .titlebar-spacer {
+  display: none !important;
+}/

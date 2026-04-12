@@ -33,7 +33,7 @@
       };
     };
     profiles.default = { 
-      userChrome = builtins.concatStringsSep "\n" [ (builtins.readFile ./userChrome.css) ];
+      userChrome = builtins.concatStringsSep "\n" [ (builtins.readFile ./theme.css) ];
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "layers.acceleration.force-enabled" = true;
