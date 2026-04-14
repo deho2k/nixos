@@ -7,7 +7,11 @@
         ./modules/keyd.nix
         ./modules/hyprland.nix
     ];
-
+    networking.firewall = {
+      enable = true;
+      allowedTCPPorts = [ 25565 ];
+      allowedUDPPorts = [ 25565 ];
+    };
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 

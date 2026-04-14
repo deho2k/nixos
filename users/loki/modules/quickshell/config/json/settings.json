@@ -13,12 +13,12 @@
         "width": 0
     },
     "hyprland": {
-        "gapsIn": 4,
-        "gapsOut": 6,
-        "rounding": 12
+        "gapsIn": 2,
+        "gapsOut": 2,
+        "rounding": 20
     },
     "theme": {
-        "theme": "wallpaper",
+        "theme": "red",
         "transition": "outer",
         "transitionDuration": 2
     }
