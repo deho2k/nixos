@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./opts/hardware-configuration.nix 
+    ./opts/hardware-configuration.nix
+    ./modules/keyd.nix
   ];
 
   boot.loader = {
