@@ -3,6 +3,8 @@
   environment.systemPackages = [
     pkgs.git
     pkgs.brightnessctl
+    pkgs.tcpdump
+    pkgs.traceroute
     inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
   ];
   services.upower.enable = true;
