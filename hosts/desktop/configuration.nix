@@ -31,14 +31,6 @@
     documentation.nixos.enable = false;
 
     environment.localBinInPath = true;
-    #users
-    users.users.loki = {
-        isNormalUser = true;
-        description = "miku";
-        extraGroups = [ "networkmanager" "wheel" ];
-        packages = with pkgs; [];
-    };
-
     services.displayManager.ly.enable = true;
 
     nix.settings = {

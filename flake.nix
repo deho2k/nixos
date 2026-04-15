@@ -18,23 +18,42 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           extraSpecialArgs = { inherit inputs; };
-          users.loki = import ./users/loki/home.nix;
           backupFileExtension = "backup";
         };
       }
+    ];
+    user-loki = [
+      ./users/loki/nixos.nix
+      { home-manager.users.loki = import ./users/loki/home.nix; }
+    ];
+    user-server = [
+      ./users/server/nixos.nix
+      { home-manager.users.server = import ./users/server/home.nix; }
     ];
   in {
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         system = "x86_64-linux";
-        modules = [ ./hosts/desktop/configuration.nix ] ++ shared-modules;
+        modules = [ ./hosts/desktop/configuration.nix ]
+                  ++ user-loki
+                  ++ shared-modules;
       };
 
       laptop = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         system = "x86_64-linux";
-        modules = [ ./hosts/laptop/configuration.nix ] ++ shared-modules;
+        modules = [ ./hosts/laptop/configuration.nix ]
+                  ++ user-loki
+                  ++ shared-modules;
+      };
+
+      server = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        system = "x86_64-linux";
+        modules = [ ./hosts/server/configuration.nix ]
+                  ++ user-server
+                  ++ shared-modules;
       };
     };
   };

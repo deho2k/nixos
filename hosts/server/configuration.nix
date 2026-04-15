@@ -3,9 +3,6 @@
 {
   imports = [
     ./opts/hardware-configuration.nix 
-      ./opts/packages.nix
-      ./modules/keyd.nix
-      ./modules/hyprland.nix
   ];
 
   boot.loader = {
@@ -19,19 +16,14 @@
 #boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "miku";
+  networking.hostName = "server";
   networking.networkmanager.enable = true;
 
   time.timeZone = "Asia/Jerusalem";
   nixpkgs.config.allowUnfree = true;
 
 #remove unnceary packages
-  services.xserver = { 
-    enable = true; 
-    excludePackages = [ 
-      pkgs.xterm
-    ];
-  };
+  services.xserver = { enable = true; excludePackages = [ pkgs.xterm ]; };
   documentation.nixos.enable = false;
 
   environment.localBinInPath = true;

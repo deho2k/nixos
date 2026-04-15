@@ -4,7 +4,7 @@
         "height": 30,
         "margins": 0,
         "pos": "left",
-        "radius": 11,
+        "radius": 12,
         "width": 45,
         "workspaceIcons": true
     },
@@ -14,11 +14,11 @@
     },
     "hyprland": {
         "gapsIn": 2,
-        "gapsOut": 2,
-        "rounding": 20
+        "gapsOut": 0,
+        "rounding": 0
     },
     "theme": {
-        "theme": "red",
+        "theme": "wallpaper",
         "transition": "outer",
         "transitionDuration": 2
     }
