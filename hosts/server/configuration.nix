@@ -2,8 +2,10 @@
 
 {
   imports = [
-    ./opts/hardware-configuration.nix
+    ./opts/hardware-configuration.nix 
+    ./opts/packages.nix
     ./modules/keyd.nix
+    ./modules/hyprland.nix
   ];
 
   boot.loader = {
