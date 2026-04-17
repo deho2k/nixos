@@ -22,12 +22,10 @@
         };
       }
     ];
-    user-loki = [
-      ./users/loki/nixos.nix
+    user-loki = [ ./users/loki/nixos.nix
       { home-manager.users.loki = import ./users/loki/home.nix; }
     ];
-    user-server = [
-      ./users/server/nixos.nix
+    user-server = [ ./users/server/nixos.nix
       { home-manager.users.server = import ./users/server/home.nix; }
     ];
   in {
