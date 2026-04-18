@@ -5,12 +5,10 @@
     pkgs.brightnessctl
     pkgs.tcpdump
     pkgs.traceroute
-    inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
   ];
   services.upower.enable = true;
   programs.neovim = {
     enable = true;
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     defaultEditor = true;
   };
   fonts.packages = with pkgs; [

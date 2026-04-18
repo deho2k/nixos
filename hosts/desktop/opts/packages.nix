@@ -2,7 +2,6 @@
 {
   environment.systemPackages = [
     pkgs.git
-    inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
   ];
   programs.neovim.enable = true;
   programs.steam.enable = true;

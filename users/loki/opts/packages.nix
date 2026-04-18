@@ -14,9 +14,9 @@
     pkgs.yazi
     pkgs.dragon-drop
     pkgs.spotify
-    pkgs.swww
+    pkgs.awww
     pkgs.appimage-run
-    pkgs.wl-clipboard
+    pkgs.clipse
     pkgs.jq
     pkgs.btop
     pkgs.fastfetch

@@ -6,6 +6,7 @@
       ./opts/packages.nix
       ./modules/keyd.nix
       ./modules/hyprland.nix
+      ./modules/keyboardLight.nix
   ];
 
   services.openssh.enable = true;

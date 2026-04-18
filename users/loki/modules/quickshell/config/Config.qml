@@ -125,9 +125,9 @@ Singleton {
     const duration = Config.theme.transitionDuration
     const imagePath = path == ""? Colors.image : path
 
-    const swwwCmd = path == ""? 
+    const awwwCmd = path == ""? 
     `echo "no path cuz maybe we switching to a theme"` :
-    `swww img "${path}" --transition-type ${transition} --transition-duration ${duration}`;
+    `awww img "${path}" --transition-type ${transition} --transition-duration ${duration}`;
 
     const matugenCmd = `matugen image "${imagePath}" --source-color-index 0`
 
@@ -135,7 +135,7 @@ Singleton {
     "" :
     `--import-json ${matugenThemes}${theme}.json`;
     // execute previous commands
-    Quickshell.execDetached([ "bash", "-c", `${swwwCmd} && ${matugenCmd} ${matugenArgs} && qs ipc call colors reload` ]);
+    Quickshell.execDetached([ "bash", "-c", `${awwwCmd} && ${matugenCmd} ${matugenArgs} && qs ipc call colors reload` ]);
   }
   // in the hyprland runtime file there are variables and i change them here
   function hyprlandRuntimePush(name, value) {
