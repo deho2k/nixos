@@ -119,6 +119,21 @@ Singleton {
   }
 
   // FUNCTIONS
+  function setTimeout(callback, ms) {
+    let t = Qt.createQmlObject(`
+    import QtQuick
+    Timer {
+      interval: ${ms}
+      repeat: false
+      running: true
+    }
+    `, Qt.application)
+
+    t.triggered.connect(() => {
+      callback()
+      t.destroy()
+    })
+  }
   function setWallpaper(path = "") { 
     const transition = Config.theme.transition
     const theme = Config.theme.theme
@@ -131,11 +146,17 @@ Singleton {
 
     const matugenCmd = `matugen image "${imagePath}" --source-color-index 0`
 
+
+
     const matugenArgs = theme == "wallpaper" ?
     "" :
     `--import-json ${matugenThemes}${theme}.json`;
     // execute previous commands
     Quickshell.execDetached([ "bash", "-c", `${awwwCmd} && ${matugenCmd} ${matugenArgs} && qs ipc call colors reload` ]);
+    setTimeout(() => {
+          Quickshell.execDetached([ "bash", "-c", `ckl color ${Colors.primary.toString().slice(1)}` ]);
+    }, 200)
+
   }
   // in the hyprland runtime file there are variables and i change them here
   function hyprlandRuntimePush(name, value) {
