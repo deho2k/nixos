@@ -30,23 +30,37 @@ Scope {
         anchors.right: parent.right
         antialiasing: true
         ShapePath {
-          fillColor : Colors.background
           strokeWidth: 0
-          fillRule  : ShapePath.OddEvenFill
-
+          fillRule: ShapePath.OddEvenFill
+          fillGradient: LinearGradient {
+            id: gradient
+            function blend(color, opacity = Config.bar.gradient? Config.bar.gradientOpacity / 100 : 0) {
+              return Qt.rgba(
+                color.r * opacity + Colors.background.r * (1 - opacity),
+                color.g * opacity + Colors.background.g * (1 - opacity),
+                color.b * opacity + Colors.background.b * (1 - opacity),
+                1.0
+              )
+            }
+            x1: 0; y1: 0
+            x2: 0; y2: frame.frameH
+            GradientStop { position: 0.0; color: gradient.blend(Colors.primary) }
+            GradientStop { position: 0.5; color: gradient.blend(Colors.shadow) }
+            GradientStop { position: 1.0; color: gradient.blend(Colors.tertiary) }
+          }
           PathRectangle {
-            width : frame.frameW
+            width:  frame.frameW
             height: frame.frameH
           }
           PathRectangle {
-            x     : frame.isSide ? 0        : frame.lw
-            y     : frame.isSide ? frame.lw : 0
-            width : frame.isSide ? frame.frameW - frame.lw       : frame.frameW - frame.lw * 2 
-            height: frame.isSide ? frame.frameH - frame.lw * 2  : frame.frameH - frame.lw
-            topLeftRadius: frame.cr
-            topRightRadius: frame.isSide? frame.lw == 0? 0 : frame.cr : frame.cr
-            bottomLeftRadius: frame.isSide?  frame.cr: frame.lw == 0? 0 : frame.cr
-            bottomRightRadius: frame.lw == 0? 0 : frame.cr
+            x:     frame.isSide ? 0        : frame.lw
+            y:     frame.isSide ? frame.lw : 0
+            width: frame.isSide ? frame.frameW - frame.lw      : frame.frameW - frame.lw * 2
+            height: frame.isSide ? frame.frameH - frame.lw * 2 : frame.frameH - frame.lw
+            topLeftRadius:     frame.cr
+            topRightRadius:    frame.isSide ? frame.lw == 0 ? 0 : frame.cr : frame.cr
+            bottomLeftRadius:  frame.isSide ? frame.cr : frame.lw == 0 ? 0 : frame.cr
+            bottomRightRadius: frame.lw == 0 ? 0 : frame.cr
           }
         }
       }

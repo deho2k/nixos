@@ -55,8 +55,11 @@ Singleton {
         property int height: 20 // for the top bar
         property int margins: 8
         property int radius: 8
+        property int gradientOpacity: 18
         property bool workspaceIcons: false
         property bool floating: true
+        property bool gradient: true
+        property bool stripes: true
         property string pos: "side"
       }
       property JsonObject theme: JsonObject {

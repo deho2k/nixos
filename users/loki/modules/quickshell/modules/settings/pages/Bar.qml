@@ -16,7 +16,7 @@ ColumnLayout {
 
   Slider {
     label: "margins"
-    from: -30
+    from: 0
     to: 400
     step: 10
     value: Config.bar.margins
@@ -33,6 +33,23 @@ ColumnLayout {
     label:"floating"
     checked: Config.bar.floating
     onCheckedChanged: Config.bar.floating = checked
+  }
+  Switch {
+    label:"stripes"
+    checked: Config.bar.stripes
+    onCheckedChanged: Config.bar.stripes = checked
+  }
+  Switch {
+    label:"gradient"
+    checked: Config.bar.gradient
+    onCheckedChanged: Config.bar.gradient = checked
+  }
+  Slider {
+    label: "gradient opacity"
+    from: 0
+    to: 100
+    value: Config.bar.gradientOpacity
+    onValueChanged: Config.bar.gradientOpacity =  value
   }
   Switch {
     label:"icons"

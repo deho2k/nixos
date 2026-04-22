@@ -17,6 +17,7 @@
     pkgs.awww
     pkgs.appimage-run
     pkgs.clipse
+    pkgs.wl-clipboard
     pkgs.jq
     pkgs.btop
     pkgs.fastfetch
