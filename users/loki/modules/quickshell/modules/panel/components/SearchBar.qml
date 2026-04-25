@@ -1,9 +1,13 @@
+//SearchBar.qml
 import QtQuick
 import qs.config
 
 Rectangle{
   required property var list
   property alias text: searchInput.text 
+  function grabFocus() {
+    searchInput.forceActiveFocus();
+  }
   color: Colors.primary
   TextInput {
     id: searchInput
@@ -14,11 +18,11 @@ Rectangle{
     Keys.onPressed: (event) => {
       if (event.key === Qt.Key_Down) { appList.incrementCurrentIndex() }
       else if (event.key === Qt.Key_Up) { appList.decrementCurrentIndex() }
-      else if (event.key === Qt.Key_Escape) { root.visible = false }
+      else if (event.key === Qt.Key_Escape) { root.active = false }
     }
     Keys.onReturnPressed: {
       appList.currentItem.modelData.execute()
-      root.visible = false
+      root.active = false
     }
   }
 }

@@ -9,17 +9,29 @@ import qs.widgets
 
 PanelWindow {
   id: submap
-  visible: false
   color: "transparent"
   height: bindList.height + header.height + 12 + arcTop.height + arcBottom.height
-  width: 300
+  width: 0
   Component.onCompleted: {
     if (this.WlrLayershell != null) {
       //used to set custom animation in the hyprlnad config check
       // hyprland/rules.conf
-      this.WlrLayershell.namespace = "qs-slide-left"
+      this.WlrLayershell.namespace = "qs-no-animation"
     }
   }
+  Behavior on height {
+    NumberAnimation {
+      duration: 200
+      easing.type: Easing.InOutQuad
+    }
+  }
+  Behavior on width {
+    NumberAnimation {
+      duration: 800
+      easing.type: Easing.InOutQuad
+    }
+  }
+
   exclusionMode: ExclusionMode.Normal
   anchors { left: true}
   property string currentSubmap: ""
@@ -36,7 +48,7 @@ PanelWindow {
         if(parseKeybinds.isInSubmap){ 
           parse = data.split("=")[1].split("#")[0]
           let parts = parse.split(",");
-          binds.append({ mods: parts[0], key: parts[1], dispatcher: parts[2], name: parts[3].trim(), description: data.split("#")[1].trim() })
+          binds.append({ mods: parts[0], key: parts[1].trim(), dispatcher: parts[2], name: parts[3].trim(), description: data.split("#")[1].trim() })
           console.log(data)
         }
         if(parse.includes("submap=" + submap.currentSubmap)) { parseKeybinds.isInSubmap = true } 
@@ -47,25 +59,28 @@ PanelWindow {
     target: Hyprland
     function onRawEvent(event) {
       if (event.name === "submap") {
-        submap.visible = event.data !== ""
+        if (event.data !== "") {
+          binds.clear()
+          submap.width = 300
+        }else {submap.width = 0 }
         submap.currentSubmap = event.data
         console.log("======================")
         parseKeybinds.running = false
         parseKeybinds.isInSubmap = false
-        binds.clear()
         if (event.data !== "") parseKeybinds.running = true
       }
     }
   }
   mask: Region {}
-  property int aw: 20
-  property int ah: 30
+  property real awPercentage: 0.1
+  property real aw: submap.width * awPercentage
+  property int ah: 20
   Shape {
     id: arcTop
     width: submap.aw
     height: submap.ah
-    anchors.bottom: root.top
-    anchors.left: root.left
+    anchors.top: parent.top
+    anchors.left: parent.left
 
     ShapePath {
       fillColor: Colors.background
@@ -84,8 +99,8 @@ PanelWindow {
     id: arcBottom
     width: submap.aw
     height: submap.ah
-    anchors.top: root.bottom
-    anchors.left: root.left
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
 
     ShapePath {
       fillColor: Colors.background
@@ -103,12 +118,13 @@ PanelWindow {
   Rectangle {
     id: root
     color: Colors.background
-    anchors.fill: parent
+    anchors.bottom: arcBottom.top
+    anchors.top: arcTop.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
     radius: 12
     topLeftRadius:0
     bottomLeftRadius:0
-    anchors.topMargin: arcTop.height
-    anchors.bottomMargin: arcBottom.height
     // Header
     Rectangle {
       id: header

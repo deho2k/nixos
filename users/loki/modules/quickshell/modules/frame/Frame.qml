@@ -32,22 +32,7 @@ Scope {
         ShapePath {
           strokeWidth: 0
           fillRule: ShapePath.OddEvenFill
-          fillGradient: LinearGradient {
-            id: gradient
-            function blend(color, opacity = Config.bar.gradient? Config.bar.gradientOpacity / 100 : 0) {
-              return Qt.rgba(
-                color.r * opacity + Colors.background.r * (1 - opacity),
-                color.g * opacity + Colors.background.g * (1 - opacity),
-                color.b * opacity + Colors.background.b * (1 - opacity),
-                1.0
-              )
-            }
-            x1: 0; y1: 0
-            x2: 0; y2: frame.frameH
-            GradientStop { position: 0.0; color: gradient.blend(Colors.primary) }
-            GradientStop { position: 0.5; color: gradient.blend(Colors.shadow) }
-            GradientStop { position: 1.0; color: gradient.blend(Colors.tertiary) }
-          }
+          fillColor: Colors.background
           PathRectangle {
             width:  frame.frameW
             height: frame.frameH

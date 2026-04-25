@@ -13,7 +13,7 @@
     },
     "frame": {
         "radius": 24,
-        "width": 11
+        "width": 0
     },
     "hyprland": {
         "gapsIn": 2,

@@ -16,16 +16,27 @@ Rectangle {
   radius: margins > 0 ? Config.bar.radius : 0
   clip: true
 
-  Rectangle {
-    visible: Config.bar.gradient
+  Item {
     anchors.fill: parent
-    opacity: Config.bar.gradientOpacity / 100
-    radius: background.radius
-    gradient: Gradient {
-      orientation: Gradient.Vertical
-      GradientStop { position: 0.0;  color: Colors.primary}
-      GradientStop { position: 0.5;  color: Colors.shadow }
-      GradientStop { position: 1.0;  color: Colors.tertiary}
+
+    Rectangle {
+      anchors.fill: parent
+      opacity: 0.1
+      gradient: Gradient {
+        orientation: Gradient.Vertical
+        GradientStop { position: 0.0; color: Colors.secondary }
+        GradientStop { position: 0.2; color: Colors.shadow } 
+        GradientStop { position: 0.8; color: Colors.shadow } 
+        GradientStop { position: 1.0; color: Colors.primary } 
+      }
+    }
+    Rectangle {
+      anchors.fill: parent
+      gradient: Gradient {
+        orientation: Gradient.Horizontal
+        GradientStop { position: 0.0; color: "transparent" }
+        GradientStop { position: 0.8; color: Colors.background}
+      }
     }
   }
   component Stripe: Rectangle {
@@ -50,9 +61,9 @@ Rectangle {
         opacity: 0.65
         spacing: 15
 
-        Stripe { height: 30; color: Colors.primary; rotation: 45 }
-        Stripe { height: 30; color: Colors.secondary; rotation: 45 }
-        Stripe { height: 30; color: Colors.tertiary; rotation: 45 }
+        Stripe { height: 30; color: Colors.primary }
+        Stripe { height: 30; color: Colors.secondary }
+        Stripe { height: 30; color: Colors.tertiary }
       }
     }
     Workspaces { id: workspaces }

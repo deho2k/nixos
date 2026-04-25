@@ -9,22 +9,30 @@ import "components"
 PanelWindow {
   id: root
   required property var model
-  implicitHeight: Math.min(480, search.Layout.preferredHeight + launcherContent.spacing + appList.contentHeight + 40)
+  required property bool active
+  implicitHeight: root.active? Math.min(480, search.Layout.preferredHeight + launcherContent.spacing + appList.contentHeight + 40) : 0
   implicitWidth: 500 + arcRight.width + arcLeft.width
   focusable: true
   color: "transparent"
-  onVisibleChanged: search.text = ""
+
+  WlrLayershell.keyboardFocus: root.active ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
+
+  onActiveChanged: {
+    search.text = "";
+    search.grabFocus();
+    WlrLayershell.keyboardFocus = root.active ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
+  }
   exclusionMode: ExclusionMode.Normal
   Component.onCompleted: {
     if (this.WlrLayershell != null) {
       //used to set custom animation in the hyprlnad config check
       // hyprland/rules.conf
-      this.WlrLayershell.namespace = "qs-slide-bottom"
+      this.WlrLayershell.namespace = "qs-no-animation"
     }
   }
   Behavior on implicitHeight {
     NumberAnimation {
-      duration: 700
+      duration: 2000
       easing.type: Easing.OutCubic
     }
   }
@@ -48,8 +56,9 @@ PanelWindow {
     model = results;
     appList.currentIndex = 0;
   }
-  property int aw: 40
-  property int ah: 40
+  property int aw: 50
+  property real ahPercentage: 0.1
+  property real ah: root.height * ahPercentage
   Shape {
     id: arcRight
     width: root.aw

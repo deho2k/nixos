@@ -13,22 +13,24 @@ PanelWindow {
   property int volumePerc: 50
   property int radius: 12
   anchors.top: true
-  Component.onCompleted: {
-    if (this.WlrLayershell != null) {
-      //used to set custom animation in the hyprlnad config check
-      // hyprland/rules.conf
-      this.WlrLayershell.namespace = "qs-slide-top"
-    }
-  }
 
   exclusionMode: ExclusionMode.Normal
   implicitWidth: 400 + arcLeft.width + arcRight.width
   implicitHeight: 180
   color: "transparent"
 
-  property int aw: 40
-  property int ah: 30
+  Behavior on implicitHeight {
+    NumberAnimation {
+      duration: 600
+      easing.type: Easing.InOutQuad
+    }
+  }
   mask: Region {}
+
+  property int aw: 40
+  property real ahPercentage: 0.2
+  property real ah: playerOsd.height * ahPercentage
+
   Shape {
     id: arcRight
     width: playerOsd.aw
