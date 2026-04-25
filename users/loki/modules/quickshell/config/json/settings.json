@@ -12,13 +12,13 @@
         "workspaceIcons": true
     },
     "frame": {
-        "radius": 16,
-        "width": 0
+        "radius": 24,
+        "width": 11
     },
     "hyprland": {
         "gapsIn": 2,
         "gapsOut": 8,
-        "rounding": 5
+        "rounding": 21
     },
     "theme": {
         "theme": "wallpaper",

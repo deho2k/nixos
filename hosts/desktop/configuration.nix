@@ -10,7 +10,6 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    services.openssh.enable = true;
     networking.hostName = "miku";
     networking.networkmanager.enable = true;
 
@@ -27,6 +26,14 @@
     documentation.nixos.enable = false;
 
     environment.localBinInPath = true;
+    #users
+    users.users.loki = {
+        isNormalUser = true;
+        description = "miku";
+        extraGroups = [ "networkmanager" "wheel" ];
+        packages = with pkgs; [];
+    };
+
     services.displayManager.ly.enable = true;
 
     nix.settings = {
