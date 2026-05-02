@@ -16,17 +16,11 @@ Variants {
     id: backgroundWidget
     required property var modelData
     screen: modelData
-
-    // WlrLayer.Bottom — sits above wallpaper, below every application window
     aboveWindows: false
-
-    // Never reserve strut space; windows tile as if this widget doesn't exist
     exclusionMode: ExclusionMode.Ignore
 
     anchors.top: true
-    anchors.right: true
-    margins.top: 70
-    margins.right: 20
+    margins { top: 70; bottom: 70; right: 70; left: 70; }
 
     color: "transparent"
 
@@ -48,16 +42,11 @@ Variants {
     readonly property string displayDate:    Qt.formatDateTime(wallClock.date, "d")
     readonly property string displayYear:    Qt.formatDateTime(wallClock.date, "yyyy")
 
-    // Colon blinks on odd seconds
     readonly property bool colonVisible: parseInt(displaySeconds) % 2 === 0
 
-    // ── Music player state ────────────────────────────────────────────────────
-    // MPRIS position doesn't emit change signals automatically, so we poll it
-    // every time the clock ticks (once per second).
     property real trackPosition: 0   // current playback position (in seconds)
     property real trackLength:   1   // total track duration — default 1 avoids ÷0
 
-    // Poll position & length from the active player on each clock tick
     onDisplaySecondsChanged: {
       if (Config.player) {
         trackPosition = Config.player.position

@@ -17,7 +17,7 @@
     },
     "hyprland": {
         "gapsIn": 2,
-        "gapsOut": 8,
+        "gapsOut": 2,
         "rounding": 21
     },
     "theme": {
