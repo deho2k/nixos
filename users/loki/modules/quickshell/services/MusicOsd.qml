@@ -21,8 +21,8 @@ PanelWindow {
 
   Behavior on implicitHeight {
     NumberAnimation {
-      duration: 600
-      easing.type: Easing.InOutQuad
+      duration: 1000
+      easing.type: Easing.OutElastic
     }
   }
   mask: Region {}

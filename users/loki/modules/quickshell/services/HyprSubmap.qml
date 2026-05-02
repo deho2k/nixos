@@ -21,14 +21,14 @@ PanelWindow {
   }
   Behavior on height {
     NumberAnimation {
-      duration: 200
-      easing.type: Easing.InOutQuad
+      duration: 1000
+      easing.type: Easing.OutElastic
     }
   }
   Behavior on width {
     NumberAnimation {
-      duration: 800
-      easing.type: Easing.InOutQuad
+      duration: 2000
+      easing.type: Easing.OutElastic
     }
   }
 
@@ -62,7 +62,7 @@ PanelWindow {
         if (event.data !== "") {
           binds.clear()
           submap.width = 300
-        }else {submap.width = 0 }
+        }else {submap.width = 0}
         submap.currentSubmap = event.data
         console.log("======================")
         parseKeybinds.running = false

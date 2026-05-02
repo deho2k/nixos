@@ -33,7 +33,7 @@ PanelWindow {
   Behavior on implicitHeight {
     NumberAnimation {
       duration: 2000
-      easing.type: Easing.OutCubic
+      easing.type: Easing.OutQuint
     }
   }
   anchors {

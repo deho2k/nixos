@@ -13,7 +13,7 @@ PanelWindow {
     if (this.WlrLayershell != null) {
       //used to set custom animation in the hyprlnad config check
       // hyprland/rules.conf
-      this.WlrLayershell.namespace = "qs-slide-left"
+      this.WlrLayershell.namespace = "qs-no-animation"
     }
   }
   id: window

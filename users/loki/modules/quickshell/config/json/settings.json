@@ -12,7 +12,7 @@
         "workspaceIcons": true
     },
     "frame": {
-        "radius": 24,
+        "radius": 18,
         "width": 0
     },
     "hyprland": {

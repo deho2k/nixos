@@ -25,6 +25,7 @@
     pkgs.zip
     pkgs.obs-studio
     pkgs.pavucontrol
+    pkgs.spotatui
     #neovim
     pkgs.ripgrep
     pkgs.lua-language-server
