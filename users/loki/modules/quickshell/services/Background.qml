@@ -37,7 +37,7 @@ Variants {
     // ── Clock (seconds-precision so the colon blinks and seconds update) ──────
     SystemClock {
       id: wallClock
-      precision: SystemClock.Seconds
+      precision: SystemClock.Minutes
     }
 
     readonly property string displayHours:   Qt.formatDateTime(wallClock.date, "hh")
@@ -264,7 +264,7 @@ Variants {
             Layout.fillWidth: true
             spacing: 14
             ClippingWrapperRectangle {
-              radius: 8
+              radius: 12; topLeftRadius: 4; bottomRightRadius: 4
               implicitWidth:  56
               implicitHeight: 56
               Image {
