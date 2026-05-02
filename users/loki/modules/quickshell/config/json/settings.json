@@ -2,11 +2,11 @@
     "bar": {
         "floating": false,
         "gradient": true,
-        "gradientOpacity": 10,
+        "gradientOpacity": 17,
         "height": 30,
         "margins": 0,
         "pos": "left",
-        "radius": 11,
+        "radius": 12,
         "stripes": true,
         "width": 45,
         "workspaceIcons": true

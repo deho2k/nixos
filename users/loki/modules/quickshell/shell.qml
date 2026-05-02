@@ -11,6 +11,7 @@ ShellRoot{
   Bar{}
   Frame {id: frame}
   HyprSubmap {}
+  Background {}
 }
 
 // NOTES

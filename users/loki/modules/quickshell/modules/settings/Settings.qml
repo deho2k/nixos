@@ -21,7 +21,7 @@ FloatingWindow {
 
   Rectangle {
     anchors.fill: parent
-    color: Qt.rgba(Colors.background.r, Colors.background.g, Colors.background.b, 0.6)
+    color: Qt.rgba(Colors.background.r, Colors.background.g, Colors.background.b, 0.5)
     border.width: 0
     clip: true
 
@@ -32,7 +32,7 @@ FloatingWindow {
       Rectangle {
         Layout.preferredHeight: 50
         Layout.fillWidth: true
-        color: Qt.rgba(Colors.background.r, Colors.background.g, Colors.background.b, 0.5)
+        color: "transparent"
 
         RowLayout {
           anchors.fill: parent
@@ -57,7 +57,7 @@ FloatingWindow {
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-            radius: 12; bottomRightRadius: 0; bottomLeftRadius: 0;
+            radius: 12
             color: isActive ? Qt.rgba(Colors.secondary_container.r, Colors.secondary_container.g, Colors.secondary_container.b, 0.4) : "transparent"
             StyledText {
               text: barItem.label
@@ -80,7 +80,7 @@ FloatingWindow {
               anchors.fill: parent
               color: Colors.on_secondary_container
               opacity: hover.hovered && !barItem.isActive ? 0.3 : 0
-              radius: 12; bottomRightRadius: 0; bottomLeftRadius: 0;
+              radius: 6;
             }
           }
         }
@@ -89,7 +89,9 @@ FloatingWindow {
       Rectangle {
         Layout.fillWidth: true
         Layout.fillHeight: true
-        color: "transparent"
+        Layout.margins: 15
+        radius: 12
+        color: Qt.rgba(Colors.background.r, Colors.background.g, Colors.background.b, 0.6)
 
         ScrollView {
           anchors.fill: parent

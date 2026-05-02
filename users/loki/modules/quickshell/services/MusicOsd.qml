@@ -1,12 +1,9 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
 import qs.config
-import qs.widgets
 import QtQuick.Shapes
-import Quickshell.Wayland 
 
 PanelWindow {
   id: playerOsd
@@ -16,9 +13,11 @@ PanelWindow {
 
   exclusionMode: ExclusionMode.Normal
   implicitWidth: 400 + arcLeft.width + arcRight.width
-  implicitHeight: 180
   color: "transparent"
 
+  readonly property int cardRadius: 14
+  readonly property int artSize:    110
+  readonly property int cardHeight: 120
   Behavior on implicitHeight {
     NumberAnimation {
       duration: 1000
@@ -71,111 +70,221 @@ PanelWindow {
       }
     }
   }
-  ColumnLayout {
+  Rectangle {
     id: root
-    anchors.fill: parent
-    anchors.leftMargin: arcLeft.width
-    anchors.rightMargin: arcRight.width
-    // music
-    Rectangle {
-      Layout.fillWidth: true
-      Layout.fillHeight: true
-      implicitHeight: 150
-      radius: playerOsd.radius
-      topLeftRadius: 0; topRightRadius: 0
-      color: Colors.background
+    anchors {
+      top:    parent.top
+      left:   parent.left
+      right:  parent.right
+      leftMargin:    arcLeft.width
+      rightMargin: arcRight.width
+    }
+    implicitHeight: playerOsd.cardHeight
 
+    color:  Colors.background
+    radius: playerOsd.cardRadius; topLeftRadius:    0; topRightRadius: 0
+
+    ClippingWrapperRectangle {
+      id: albumArtFrame
+      anchors {
+        left:   parent.left
+        top:    parent.top
+        bottom: parent.bottom
+      }
+      width:  playerOsd.artSize
+      radius: 12
+      anchors.margins: 5
+
+
+      Image {
+        anchors.fill: parent
+        source:       Config.player.trackArtUrl
+        fillMode:     Image.PreserveAspectCrop
+        asynchronous: true
+
+        Behavior on source {
+          // Brief fade when the track (and therefore art) changes
+        }
+      }
+
+    }
+
+    // ── Info area (everything to the right of the album art) ─────────────
+    ColumnLayout {
+      anchors {
+        left:          albumArtFrame.right
+        right:         parent.right
+        top:           parent.top
+        bottom:        parent.bottom
+        leftMargin:    12
+        rightMargin:   18
+        topMargin:     14
+        bottomMargin:  12
+      }
+      spacing: 0
+
+      // Row 1: title + source icon
       RowLayout {
-        anchors {
-          fill: parent
-          margins: 8
+        Layout.fillWidth: true
+        spacing: 8
+
+        Text {
+          Layout.fillWidth: true
+          text:  Config.player ? Config.player.trackTitle : "Nothing playing"
+          font.pixelSize: 17
+          font.weight:    Font.Bold
+          color:          Colors.on_surface
+          elide:          Text.ElideRight
         }
 
-        ClippingWrapperRectangle {
-          id: artImage
-          radius: 12
-          implicitWidth: 130
-          Layout.fillHeight: true
-          Image {
-            source: Config.player.trackArtUrl
-            fillMode: Image.PreserveAspectCrop
-            StyledText {
-              anchors.centerIn: parent
-              font.pixelSize: 50
-              opacity: 0.6
-              text: Config.player.isPlaying ? "" : ""
-              Layout.alignment: Qt.AlignCenter
-            }
-          }
+        // Spotify  or generic music icon, top-right corner
+        Text {
+          text: Config.player
+          ? (Config.player.identity === "Spotify" ? "" : "󰎆")
+          : ""
+          font.pixelSize: 13
+          color:          Colors.primary
+          opacity:        0.55
         }
-        ColumnLayout {
-          StyledText {
-            text: Config.player.trackTitle
-            font.pixelSize: 20
-            Layout.maximumWidth: parent.width
-            Layout.minimumWidth: 230 - arcLeft
+      }
+
+      // Row 2: artist name
+      Text {
+        Layout.fillWidth: true
+        Layout.topMargin: 2
+        text:  Config.player ? Config.player.trackArtist : ""
+        font.pixelSize: 13
+        font.weight:    Font.Light
+        color:          Colors.on_surface
+        opacity:        0.55
+        elide:          Text.ElideRight
+      }
+
+      Item { Layout.fillHeight: true }
+
+      // Row 3: progress bar
+      Item {
+        Layout.fillWidth: true
+        implicitHeight: 4
+
+        // Rail
+        Rectangle {
+          anchors.fill: parent
+          radius: 2
+          color:  Colors.outline_variant
+        }
+
+        // Fill
+        Rectangle {
+          id: progressFill
+          anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
+          width:  Math.max(radius * 2,
+          parent.width * playerOsd.trackProgress)
+          radius: 2
+          color:  Colors.primary
+          Behavior on width {
+            NumberAnimation { duration: 950; easing.type: Easing.Linear }
           }
-          StyledText {
-            text: Config.player.trackArtist
-            font.pixelSize: 16
-            Layout.maximumWidth: playerOsd.width - artImage.width - 40
-            Layout.rightMargin: 8
-          }
+          Behavior on color { ColorAnimation { duration: 500 } }
+        }
 
-          ProgressBar {
-            id: pb
-            Layout.fillWidth: true
-            implicitHeight: 8
-            value: Config.player.position
-            from: 0
-            to: Config.player.length
-
-            background: Rectangle {
-              implicitHeight: 8
-              radius: 4
-              color: Colors.outline_variant
-            }
-
-            contentItem: Item {
-              implicitWidth: pb.width
-              implicitHeight: pb.height
-
-              Rectangle {
-                width: pb.visualPosition * parent.width
-                height: parent.height
-                radius: 4
-                color: Colors.outline
-              }
-            }
+        // Playhead dot
+        Rectangle {
+          x: progressFill.width - (width / 2)
+          anchors.verticalCenter: parent.verticalCenter
+          width: 10; height: 10; radius: 5
+          color: "white"
+          opacity: 0.9
+          Behavior on x {
+            NumberAnimation { duration: 950; easing.type: Easing.Linear }
           }
         }
       }
-    }
-    // volume
-    Rectangle {
-      color: Colors.background
-      implicitHeight: 24
-      Layout.fillWidth: true
-      Layout.fillHeight: true
-      radius: 12
 
-      Rectangle {
-        width: 15
-        anchors.fill: parent
-        anchors.margins: 8
-        radius: 32
-        color: Colors.outline_variant
+      // Row 4: timestamps + play/pause + volume
+      RowLayout {
+        Layout.fillWidth: true
+        Layout.topMargin: 6
+        spacing: 8
 
-        Rectangle {
-          anchors {
-            left: parent.left
-            top: parent.top
-            bottom: parent.bottom
+        // Current position
+        Text {
+          text:           playerOsd.formatDuration(playerOsd.trackPosition)
+          font.pixelSize: 11
+          color:          Colors.on_surface
+          opacity:        0.40
+        }
+
+        // Total length
+        Text {
+          text:           "/ " + playerOsd.formatDuration(playerOsd.trackLength)
+          font.pixelSize: 11
+          color:          Colors.on_surface
+          opacity:        0.25
+        }
+
+        Item { Layout.fillWidth: true }
+
+        // Play / pause state icon
+        Text {
+          text: Config.player
+          ? (Config.player.isPlaying ? "" : "")
+          : ""
+          font.pixelSize: 14
+          color:          Colors.primary
+          opacity:        0.80
+        }
+
+        // ── Volume indicator ──────────────────────────────────────────
+        // Speaker icon + compact horizontal bar + percentage
+        RowLayout {
+          spacing: 6
+
+          // Speaker icon scales with volume level
+          Text {
+            text: {
+              let v = playerOsd.volumePerc
+              if (v === 0)   return "󰖁"
+              if (v < 35)    return "󰕿"
+              if (v < 70)    return "󰖀"
+              return "󰕾"
+            }
+            font.pixelSize: 13
+            color:          Colors.secondary
+            opacity:        0.70
           }
-          color: Colors.outline
 
-          implicitWidth: parent.width * playerOsd.volumePerc / 100
-          radius: parent.radius
+          // Compact volume bar
+          Item {
+            implicitWidth:  64
+            implicitHeight: 4
+
+            Rectangle {
+              anchors.fill: parent
+              radius: 2
+              color:  Colors.outline_variant
+            }
+            Rectangle {
+              anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
+              width:  Math.max(radius * 2,
+              parent.width * (playerOsd.volumePerc / 100))
+              radius: 2
+              color:  Colors.secondary
+              opacity: 0.80
+              Behavior on width {
+                NumberAnimation { duration: 200; easing.type: Easing.OutQuad }
+              }
+              Behavior on color { ColorAnimation { duration: 500 } }
+            }
+          }
+
+          // Percentage label
+          Text {
+            text:           playerOsd.volumePerc + "%"
+            font.pixelSize: 11
+            color:          Colors.on_surface
+            opacity:        0.40
+          }
         }
       }
     }
