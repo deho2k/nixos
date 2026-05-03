@@ -6,6 +6,6 @@ Background{
   StyledText {
     id: clock
     anchors.centerIn: parent
-    text: "󰥔  " + Config.timeHours + ":" + Config.timeMinutes
+    text: "󰥔  " + Config.displayHours + ":" + Config.displayMinutes
   }
 }

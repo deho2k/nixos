@@ -4,8 +4,8 @@ import qs.config
 import qs.widgets
 
 Background{
-  visible: Config.player
   id: root
+  visible: Config.player
   property int perc: Config.player 
       ? (Config.player.position / Config.player.length * 100) 
       : 0
@@ -20,17 +20,17 @@ Background{
     id: layout
     spacing: 5
     anchors.centerIn: parent
-    CircleProgress {
+    CircleProgressWrapper {
       MouseArea {
         anchors.fill: parent
         onClicked: {
           Config.player.togglePlaying()
         }
       }
+      Layout.preferredHeight: root.height
+      Layout.preferredWidth: root.height
       percentage: root.perc
       icon: Config.player ? Config.player.identity == "Spotify"? "": "󰎆" : ""
-      lineWidth: 3
-      margin: 12
     }
     StyledText {
       id: tracktitle

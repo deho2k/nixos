@@ -4,7 +4,7 @@ Rectangle{
   height: parent.height
   width: childrenRect.width + 15
   color: Colors.background
-  radius: parent.radius
+  radius: Config.bar.radius
   bottomRightRadius: Config.bar.radius
   bottomLeftRadius: Config.bar.radius
 }

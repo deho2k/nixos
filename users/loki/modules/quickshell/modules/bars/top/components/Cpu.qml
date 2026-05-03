@@ -3,12 +3,9 @@ import qs.widgets
 import qs.config
 
 Background{
-  CircleProgress {
+  CircleProgressWrapper {
     percentage: Config.cpuUsage
     icon: ""
-    lineWidth: 3
-    margin: 12
-    anchors.verticalCenter: parent.verticalCenter
     anchors.right: cpu.left
   }
   StyledText {

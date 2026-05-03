@@ -10,4 +10,6 @@ Rectangle{
   radius: parent.parent.radius
   implicitHeight: childrenRect.height
   Layout.alignment: Qt.AlignHCenter
+  bottomRightRadius: Config.bar.margins <= 0? Config.bar.radius :undefined 
+  topRightRadius: Config.bar.margins <= 0? Config.bar.radius :undefined 
 }

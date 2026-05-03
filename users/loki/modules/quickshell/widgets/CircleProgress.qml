@@ -11,6 +11,7 @@ Rectangle {
     property int percentage: 0
     property int lineWidth: 6
     property int margin: 8
+    property int fontSize: 16
     property string icon: ""
     property color backgroundColor: Colors.outline 
     property color progressColor: Colors.secondary
@@ -51,7 +52,7 @@ Rectangle {
     }
     StyledText {
       text: root.icon
-      font.pixelSize: 16
+      font.pixelSize: root.fontSize
       anchors.centerIn: parent
     }
 }

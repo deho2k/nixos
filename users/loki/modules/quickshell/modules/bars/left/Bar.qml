@@ -14,22 +14,35 @@ Rectangle {
   anchors.bottomMargin: margins
   anchors.leftMargin: margins > 0 ? 5 : 0
   radius: margins > 0 ? Config.bar.radius : 0
+  Behavior on anchors.topMargin {
+    NumberAnimation {
+      duration: 100
+      easing.type: Easing.Linear
+    }
+  }
+  Behavior on anchors.bottomMargin {
+    NumberAnimation {
+      duration: 100
+      easing.type: Easing.Linear
+    }
+  }
   clip: true
 
   Item {
-    visible: Config.bar.gradient && !Config.bar.floatng
+    visible: Config.bar.gradient && !Config.bar.floating
     anchors.fill: parent
 
     Rectangle {
       anchors.fill: parent
       radius: Config.bar.radius
-      opacity: Config.bar.gradientOpacity
+      opacity: Config.bar.gradientOpacity / 100
       gradient: Gradient {
         orientation: Gradient.Vertical
-        GradientStop { position: 0.0; color: Colors.secondary }
-        GradientStop { position: 0.2; color: Colors.shadow } 
-        GradientStop { position: 0.8; color: Colors.shadow } 
-        GradientStop { position: 1.0; color: Colors.primary } 
+        GradientStop { position: 0.0; color: Colors.secondary}
+        GradientStop { position: 0.2; color: Colors.shadow}
+        GradientStop { position: 0.5; color: Colors.primary}
+        GradientStop { position: 0.8; color: Colors.shadow}
+        GradientStop { position: 1.0; color: Colors.tertiary}
       }
     }
     Rectangle {
@@ -53,8 +66,9 @@ Rectangle {
     anchors.fill: parent
     spacing: 12
     Date {
-      Layout.topMargin: 10
       id: clock
+      topRightRadius: Config.bar.margins <= 0? 0:undefined 
+
     }
     Player { id: player }
     Item { 
@@ -88,8 +102,8 @@ Rectangle {
     }
     Ram { id: ram }
     Cpu {
-      Layout.bottomMargin: 10
       id: cpu
+      bottomRightRadius: Config.bar.margins <= 0? 0:undefined 
     }
   }
 }
