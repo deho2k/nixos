@@ -10,7 +10,7 @@ Rectangle {
 
     property int percentage: 0
     property int lineWidth: 6
-    property int margin: 7
+    property int margin: 8
     property string icon: ""
     property color backgroundColor: Colors.outline 
     property color progressColor: Colors.secondary

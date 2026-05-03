@@ -60,7 +60,7 @@ Singleton {
         property bool floating: true
         property bool gradient: true
         property bool stripes: true
-        property string pos: "side"
+        property string pos: "left"
       }
       property JsonObject theme: JsonObject {
         property int transitionDuration: 1
@@ -77,8 +77,25 @@ Singleton {
 
   property string barLayout: "side"
 
-  readonly property string timeHours: { Qt.formatDateTime(clock.date, "hh") }
-  readonly property string timeMinutes: { Qt.formatDateTime(clock.date, "mm") }
+  readonly property string displayHours:   Qt.formatDateTime(wallClock.date, "hh")
+  readonly property string displayMinutes: Qt.formatDateTime(wallClock.date, "mm")
+  readonly property string displaySeconds: Qt.formatDateTime(wallClock.date, "ss")
+  readonly property string displayDay:     Qt.formatDateTime(wallClock.date, "dddd").toUpperCase()
+  readonly property string displayMonth:   Qt.formatDateTime(wallClock.date, "MMMM")
+  readonly property string displayDate:    Qt.formatDateTime(wallClock.date, "d")
+  readonly property string displayYear:    Qt.formatDateTime(wallClock.date, "yyyy")
+  property real trackPosition: 0
+  property real trackLength:   1
+  onDisplaySecondsChanged: {
+    if (Config.player) {
+      trackPosition = Config.player.position
+      trackLength   = Config.player.length > 0 ? Config.player.length : 1
+    }
+  }
+  SystemClock {
+    id: wallClock
+    precision: SystemClock.Seconds
+  }
   SystemClock {
     id: clock
     precision: SystemClock.Minutes
@@ -148,8 +165,6 @@ Singleton {
     `awww img "${path}" --transition-type ${transition} --transition-duration ${duration}`;
 
     const matugenCmd = `matugen image "${imagePath}" --source-color-index 0`
-
-
 
     const matugenArgs = theme == "wallpaper" ?
     "" :

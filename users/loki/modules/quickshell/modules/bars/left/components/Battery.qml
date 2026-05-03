@@ -3,8 +3,7 @@ import Quickshell.Services.UPower
 import qs.config
 
 Background {
-  CircleProgress {
-    anchors.centerIn: parent
+  CircleProgressWrapper {
     property string batteryIcon: {
       let pct = Config.battery.percentage
 

@@ -3,8 +3,7 @@ import qs.config
 import qs.widgets
 
 Background {
-  CircleProgress {
-    anchors.centerIn: parent
+  CircleProgressWrapper {
     percentage: Config.memUsage
     icon: ""
   }

@@ -7,6 +7,7 @@ import qs.config
 import "components"
 
 Rectangle {
+  id: background
   anchors.fill: parent
 
   property var margins: Config.bar.margins

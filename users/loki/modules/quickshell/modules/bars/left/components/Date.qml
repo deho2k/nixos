@@ -5,16 +5,17 @@ import qs.widgets
 import qs.config
 
 Background {
+  implicitHeight: childrenRect.height + 10
   ColumnLayout {
     anchors.centerIn: parent
     StyledText {
       id: clockHours
-      text: Config.timeHours
+      text: Config.displayHours
       horizontalAlignment: Text.AlignHCenter
     }
     StyledText {
       id: clockMinutes
-      text: Config.timeMinutes
+      text: Config.displayMinutes
       horizontalAlignment: Text.AlignHCenter
     }
   }

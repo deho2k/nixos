@@ -6,6 +6,7 @@ import qs.widgets
 
 Background {
   id: root
+  implicitHeight: childrenRect.height + 20
   property bool showIcons: Config.bar.workspaceIcons
 
   property real activeRadius:   3

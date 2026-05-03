@@ -20,14 +20,14 @@ ColumnLayout {
     to: 400
     step: 10
     value: Config.bar.margins
-    onValueChanged: Config.bar.margins =  value
+    onValueChanged: Config.bar.margins = value
   }
   Slider {
     label: "radius"
     from: 0
     to: 16
     value: Config.bar.radius
-    onValueChanged: Config.bar.radius =  value
+    onValueChanged: Config.bar.radius = value
   }
   Switch {
     label:"floating"
@@ -47,9 +47,9 @@ ColumnLayout {
   Slider {
     label: "gradient opacity"
     from: 0
-    to: 100
+    to: 50
     value: Config.bar.gradientOpacity
-    onValueChanged: Config.bar.gradientOpacity =  value
+    onValueChanged: Config.bar.gradientOpacity = value
   }
   Switch {
     label:"icons"

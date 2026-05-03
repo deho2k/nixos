@@ -26,7 +26,6 @@ ColumnLayout {
     label: "gaps in"
     from: 0
     to: 64
-    step: 2
     value: Config.hyprland.gapsIn
     onValueChanged: {
       Config.hyprland.gapsIn = value
@@ -37,7 +36,6 @@ ColumnLayout {
     label: "gaps out"
     from: 0
     to: 64
-    step: 2
     value: Config.hyprland.gapsOut
     onValueChanged: {
       Config.hyprland.gapsOut = value

@@ -5,10 +5,8 @@ import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 import qs.config
+import qs.widgets
 
-// Desktop background widget — renders below all windows, above the wallpaper.
-// Shows clock (time / day / date) and the active music player when one exists.
-// All colors are driven by the matugen Colors singleton and update live.
 Variants {
   id: root
   model: Quickshell.screens
@@ -20,6 +18,7 @@ Variants {
     exclusionMode: ExclusionMode.Ignore
 
     anchors.top: true
+    anchors.left: true
     margins { top: 70; bottom: 70; right: 70; left: 70; }
 
     color: "transparent"
@@ -31,30 +30,16 @@ Variants {
     // ── Clock (seconds-precision so the colon blinks and seconds update) ──────
     SystemClock {
       id: wallClock
-      precision: SystemClock.Minutes
+      precision: SystemClock.Seconds
     }
 
-    readonly property string displayHours:   Qt.formatDateTime(wallClock.date, "hh")
-    readonly property string displayMinutes: Qt.formatDateTime(wallClock.date, "mm")
-    readonly property string displaySeconds: Qt.formatDateTime(wallClock.date, "ss")
-    readonly property string displayDay:     Qt.formatDateTime(wallClock.date, "dddd").toUpperCase()
-    readonly property string displayMonth:   Qt.formatDateTime(wallClock.date, "MMMM")
-    readonly property string displayDate:    Qt.formatDateTime(wallClock.date, "d")
-    readonly property string displayYear:    Qt.formatDateTime(wallClock.date, "yyyy")
 
-    readonly property bool colonVisible: parseInt(displaySeconds) % 2 === 0
+    readonly property bool colonVisible: parseInt(Config.displaySeconds) % 2 === 0
 
-    property real trackPosition: 0   // current playback position (in seconds)
-    property real trackLength:   1   // total track duration — default 1 avoids ÷0
+    property real trackPosition: Config.trackPosition
+    property real trackLength:   Config.trackLength
 
-    onDisplaySecondsChanged: {
-      if (Config.player) {
-        trackPosition = Config.player.position
-        trackLength   = Config.player.length > 0 ? Config.player.length : 1
-      }
-    }
 
-    // Fraction through the track (0.0 – 1.0) used by the progress bar
     readonly property real trackProgress: trackPosition / trackLength
 
     readonly property string playerIcon: {
@@ -77,9 +62,9 @@ Variants {
       anchors.bottomMargin: 20
       spacing: 6
 
-      Text {
-        Layout.alignment: Qt.AlignRight
-        text: backgroundWidget.displayDay
+      StyledText {
+        Layout.alignment: backgroundWidget.anchors.right? Qt.AlignRight: Qt.AlignLeft
+        text: Config.displayDay
         font.pixelSize: 13
         font.letterSpacing: 5
         font.weight: Font.Medium
@@ -93,8 +78,8 @@ Variants {
         Layout.alignment: Qt.AlignRight
         spacing: 0
 
-        Text {
-          text: backgroundWidget.displayHours
+        StyledText {
+          text: Config.displayHours
           font.pixelSize: 100
           font.weight: Font.Bold
           color: Colors.on_surface
@@ -103,7 +88,7 @@ Variants {
           Behavior on color { ColorAnimation { duration: 400 } }
         }
 
-        Text {
+        StyledText {
           text: ":"
           font.pixelSize: 100
           font.weight: Font.Thin
@@ -116,8 +101,8 @@ Variants {
           }
         }
 
-        Text {
-          text: backgroundWidget.displayMinutes
+        StyledText {
+          text: Config.displayMinutes
           font.pixelSize: 100
           font.weight: Font.Bold
           color: Colors.on_surface
@@ -126,11 +111,11 @@ Variants {
           Behavior on color { ColorAnimation { duration: 400 } }
         }
 
-        Text {
+        StyledText {
           Layout.alignment: Qt.AlignBottom
           bottomPadding: 14
           leftPadding: 8
-          text: backgroundWidget.displaySeconds
+          text: Config.displaySeconds
           font.pixelSize: 22
           font.weight: Font.Light
           color: Colors.primary
@@ -168,8 +153,8 @@ Variants {
         Layout.alignment: Qt.AlignRight
         spacing: 8
 
-        Text {
-          text: backgroundWidget.displayMonth
+        StyledText {
+          text: Config.displayMonth
           font.pixelSize: 15
           font.letterSpacing: 2
           font.weight: Font.Light
@@ -178,8 +163,8 @@ Variants {
           style: Text.Raised
           styleColor: Qt.rgba(0, 0, 0, 0.6)
         }
-        Text {
-          text: backgroundWidget.displayDate
+        StyledText {
+          text: Config.displayDate
           font.pixelSize: 15
           font.weight: Font.Bold
           color: Colors.primary
@@ -188,14 +173,14 @@ Variants {
           styleColor: Qt.rgba(0, 0, 0, 0.6)
           Behavior on color { ColorAnimation { duration: 400 } }
         }
-        Text {
+        StyledText {
           text: "·"
           font.pixelSize: 15
           color: Colors.outline
           opacity: 0.50
         }
-        Text {
-          text: backgroundWidget.displayYear
+        StyledText {
+          text: Config.displayYear
           font.pixelSize: 15
           font.letterSpacing: 2
           font.weight: Font.Light
@@ -240,7 +225,7 @@ Variants {
               color: Colors.outline
               opacity: 0.20
             }
-            Text {
+            StyledText {
               text: backgroundWidget.playerIcon
               font.pixelSize: 22
               color: Colors.primary
@@ -253,22 +238,17 @@ Variants {
             Layout.fillWidth: true
             spacing: 14
             ClippingWrapperRectangle {
+              color: "transparent"
               radius: 12; topLeftRadius: 4; bottomRightRadius: 4
               implicitWidth:  56
               implicitHeight: 56
-              Image {
-                anchors.fill: parent
-                source:   Config.player.trackArtUrl
-                fillMode: Image.PreserveAspectCrop
-                visible:  Config.player ? Config.player.trackArtUrl !== "" : false
-                asynchronous: true
-              }
+              TrackArt { }
             }
             ColumnLayout {
               Layout.fillWidth: true
               spacing: 3
 
-              Text {
+              StyledText {
                 Layout.fillWidth: true
                 text: Config.player ? Config.player.trackTitle : ""
                 font.pixelSize: 15
@@ -278,9 +258,10 @@ Variants {
                 elide: Text.ElideRight
                 style: Text.Raised
                 styleColor: Qt.rgba(0, 0, 0, 0.65)
+                textAnimateX: true
               }
 
-              Text {
+              StyledText {
                 Layout.fillWidth: true
                 text: Config.player ? Config.player.trackArtist : ""
                 font.pixelSize: 13
@@ -290,8 +271,9 @@ Variants {
                 elide: Text.ElideRight
                 style: Text.Raised
                 styleColor: Qt.rgba(0, 0, 0, 0.6)
+                textAnimateX: true
               }
-              Text {
+              StyledText {
                 text: Config.player
                 ? (Config.player.isPlaying ? "Playing" : "Paused")
                 : ""
@@ -338,9 +320,10 @@ Variants {
             RowLayout {
               Layout.fillWidth: true
 
-              Text {
-                text: backgroundWidget.formatDuration(backgroundWidget.trackPosition)
+              StyledText {
+                text: backgroundWidget.formatDuration(Config.trackPosition)
                 font.pixelSize: 11
+                textAnimation: false
                 font.letterSpacing: 0.5
                 color: Colors.on_surface
                 opacity: 0.38
@@ -350,7 +333,7 @@ Variants {
 
               Item { Layout.fillWidth: true }
 
-              Text {
+              StyledText {
                 text: backgroundWidget.formatDuration(backgroundWidget.trackLength)
                 font.pixelSize: 11
                 font.letterSpacing: 0.5

@@ -2,8 +2,9 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
-import qs.config
 import QtQuick.Shapes
+import qs.config
+import qs.widgets
 
 PanelWindow {
   id: playerOsd
@@ -20,8 +21,8 @@ PanelWindow {
   readonly property int cardHeight: 120
   Behavior on implicitHeight {
     NumberAnimation {
-      duration: 1000
-      easing.type: Easing.OutElastic
+      duration: 200
+      easing.type: Easing.InQuad
     }
   }
   mask: Region {}
@@ -70,13 +71,35 @@ PanelWindow {
       }
     }
   }
+    property real trackPosition: 0
+    property real trackLength:   1
+
+    Timer {
+        interval: 1000
+        running:  true
+        repeat:   true
+        onTriggered: {
+            if (Config.player) {
+                trackPosition = Config.player.position
+                trackLength   = Config.player.length > 0 ? Config.player.length : 1
+            }
+        }
+    }
+  readonly property real trackProgress: trackPosition / trackLength
+
+  function formatDuration(totalSeconds) {
+    let s    = Math.max(0, Math.floor(totalSeconds))
+    let mins = Math.floor(s / 60)
+    let secs = s % 60
+    return mins + ":" + (secs < 10 ? "0" + secs : secs)
+  }
   Rectangle {
     id: root
     anchors {
       top:    parent.top
       left:   parent.left
       right:  parent.right
-      leftMargin:    arcLeft.width
+      leftMargin: arcLeft.width
       rightMargin: arcRight.width
     }
     implicitHeight: playerOsd.cardHeight
@@ -91,25 +114,15 @@ PanelWindow {
         top:    parent.top
         bottom: parent.bottom
       }
+      color: "transparent"
       width:  playerOsd.artSize
       radius: 12
       anchors.margins: 5
 
 
-      Image {
-        anchors.fill: parent
-        source:       Config.player.trackArtUrl
-        fillMode:     Image.PreserveAspectCrop
-        asynchronous: true
-
-        Behavior on source {
-          // Brief fade when the track (and therefore art) changes
-        }
-      }
+      TrackArt { }
 
     }
-
-    // ── Info area (everything to the right of the album art) ─────────────
     ColumnLayout {
       anchors {
         left:          albumArtFrame.right
@@ -122,34 +135,31 @@ PanelWindow {
         bottomMargin:  12
       }
       spacing: 0
-
-      // Row 1: title + source icon
       RowLayout {
         Layout.fillWidth: true
         spacing: 8
 
-        Text {
+        StyledText {
           Layout.fillWidth: true
           text:  Config.player ? Config.player.trackTitle : "Nothing playing"
           font.pixelSize: 17
           font.weight:    Font.Bold
           color:          Colors.on_surface
           elide:          Text.ElideRight
+          textAnimateX: true
         }
 
         // Spotify  or generic music icon, top-right corner
-        Text {
+        StyledText {
           text: Config.player
-          ? (Config.player.identity === "Spotify" ? "" : "󰎆")
+          ? (Config.player.identity === "Spotify" ? "" : "󰎆")
           : ""
           font.pixelSize: 13
           color:          Colors.primary
-          opacity:        0.55
         }
       }
 
-      // Row 2: artist name
-      Text {
+      StyledText {
         Layout.fillWidth: true
         Layout.topMargin: 2
         text:  Config.player ? Config.player.trackArtist : ""
@@ -158,23 +168,20 @@ PanelWindow {
         color:          Colors.on_surface
         opacity:        0.55
         elide:          Text.ElideRight
+        textAnimateX: true
       }
 
       Item { Layout.fillHeight: true }
 
-      // Row 3: progress bar
       Item {
         Layout.fillWidth: true
         implicitHeight: 4
-
-        // Rail
         Rectangle {
           anchors.fill: parent
           radius: 2
           color:  Colors.outline_variant
         }
 
-        // Fill
         Rectangle {
           id: progressFill
           anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
@@ -188,26 +195,13 @@ PanelWindow {
           Behavior on color { ColorAnimation { duration: 500 } }
         }
 
-        // Playhead dot
-        Rectangle {
-          x: progressFill.width - (width / 2)
-          anchors.verticalCenter: parent.verticalCenter
-          width: 10; height: 10; radius: 5
-          color: "white"
-          opacity: 0.9
-          Behavior on x {
-            NumberAnimation { duration: 950; easing.type: Easing.Linear }
-          }
-        }
       }
 
-      // Row 4: timestamps + play/pause + volume
       RowLayout {
         Layout.fillWidth: true
         Layout.topMargin: 6
         spacing: 8
 
-        // Current position
         Text {
           text:           playerOsd.formatDuration(playerOsd.trackPosition)
           font.pixelSize: 11
@@ -215,7 +209,6 @@ PanelWindow {
           opacity:        0.40
         }
 
-        // Total length
         Text {
           text:           "/ " + playerOsd.formatDuration(playerOsd.trackLength)
           font.pixelSize: 11
@@ -225,22 +218,18 @@ PanelWindow {
 
         Item { Layout.fillWidth: true }
 
-        // Play / pause state icon
         Text {
           text: Config.player
-          ? (Config.player.isPlaying ? "" : "")
+          ? (Config.player.isPlaying ? "" : "")
           : ""
           font.pixelSize: 14
           color:          Colors.primary
           opacity:        0.80
         }
 
-        // ── Volume indicator ──────────────────────────────────────────
-        // Speaker icon + compact horizontal bar + percentage
+        //volume indicator
         RowLayout {
           spacing: 6
-
-          // Speaker icon scales with volume level
           Text {
             text: {
               let v = playerOsd.volumePerc

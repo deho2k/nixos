@@ -12,6 +12,8 @@ PanelWindow {
   color: "transparent"
   height: bindList.height + header.height + 12 + arcTop.height + arcBottom.height
   width: 0
+  property bool floating: Config.bar.floating && Config.bar.pos == "left"
+  margins.left: floating? 15: 0
   Component.onCompleted: {
     if (this.WlrLayershell != null) {
       //used to set custom animation in the hyprlnad config check
@@ -77,6 +79,7 @@ PanelWindow {
   property int ah: 20
   Shape {
     id: arcTop
+    visible: !submap.floating
     width: submap.aw
     height: submap.ah
     anchors.top: parent.top
@@ -97,6 +100,7 @@ PanelWindow {
   }
   Shape {
     id: arcBottom
+    visible: !submap.floating
     width: submap.aw
     height: submap.ah
     anchors.bottom: parent.bottom
@@ -123,8 +127,9 @@ PanelWindow {
     anchors.left: parent.left
     anchors.right: parent.right
     radius: 12
-    topLeftRadius:0
-    bottomLeftRadius:0
+    topLeftRadius: submap.floating? 12 : 0
+    bottomLeftRadius: submap.floating? 12 : 0
+
     // Header
     Rectangle {
       id: header

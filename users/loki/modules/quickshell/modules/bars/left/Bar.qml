@@ -17,11 +17,13 @@ Rectangle {
   clip: true
 
   Item {
+    visible: Config.bar.gradient && !Config.bar.floatng
     anchors.fill: parent
 
     Rectangle {
       anchors.fill: parent
-      opacity: 0.1
+      radius: Config.bar.radius
+      opacity: Config.bar.gradientOpacity
       gradient: Gradient {
         orientation: Gradient.Vertical
         GradientStop { position: 0.0; color: Colors.secondary }
@@ -32,6 +34,7 @@ Rectangle {
     }
     Rectangle {
       anchors.fill: parent
+      radius: Config.bar.radius
       gradient: Gradient {
         orientation: Gradient.Horizontal
         GradientStop { position: 0.0; color: "transparent" }
@@ -40,7 +43,7 @@ Rectangle {
     }
   }
   component Stripe: Rectangle {
-    visible: Config.bar.stripes
+    visible: Config.bar.stripes && !Config.bar.floating
     width: background.width * 4
     x: -background.width * 1.5
     rotation: -45

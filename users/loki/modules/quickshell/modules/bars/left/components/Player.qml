@@ -5,26 +5,14 @@ import qs.config
 
 Background {
   id: root
-  property int perc: Config.player 
-      ? (Config.player.position / Config.player.length * 100) 
-      : 0
-
-  Timer {
-    interval: 3000
-    running: true
-    repeat: true
-    onTriggered: { root.perc = Config.player.position / Config.player.length * 100 }
-  }
-  CircleProgress {
+  CircleProgressWrapper {
     MouseArea {
       anchors.centerIn: parent
       onClicked: {
         Config.player.togglePlaying()
       }
     }
-    anchors.centerIn: parent
-    percentage: root.perc
+    percentage: Config.trackPosition / Config.trackLength * 100
     icon: Config.player ? Config.player.identity == "Spotify"? "": "󰎆" : ""
-    lineWidth: 5
   }
 }

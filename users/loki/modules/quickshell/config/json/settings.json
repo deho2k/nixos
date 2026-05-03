@@ -2,9 +2,9 @@
     "bar": {
         "floating": false,
         "gradient": true,
-        "gradientOpacity": 17,
+        "gradientOpacity": 4,
         "height": 30,
-        "margins": 0,
+        "margins": 50,
         "pos": "left",
         "radius": 12,
         "stripes": true,
@@ -13,11 +13,11 @@
     },
     "frame": {
         "radius": 18,
-        "width": 0
+        "width": 7
     },
     "hyprland": {
         "gapsIn": 2,
-        "gapsOut": 2,
+        "gapsOut": 17,
         "rounding": 21
     },
     "theme": {

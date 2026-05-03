@@ -13,6 +13,7 @@ PanelWindow {
   implicitHeight: root.active? Math.min(480, search.Layout.preferredHeight + launcherContent.spacing + appList.contentHeight + 40) : 0
   implicitWidth: 500 + arcRight.width + arcLeft.width
   focusable: true
+  anchors.bottom: true
   color: "transparent"
 
   WlrLayershell.keyboardFocus: root.active ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
@@ -35,9 +36,6 @@ PanelWindow {
       duration: 2000
       easing.type: Easing.OutQuint
     }
-  }
-  anchors {
-    bottom: true
   }
 
   function filterApps(query) {
