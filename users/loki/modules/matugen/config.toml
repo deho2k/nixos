@@ -29,6 +29,10 @@ block_postfix = "*>"
 input_path = "./templates/image.txt"
 output_path = "/tmp/image.txt"
 
+[templates.hyprland]
+input_path = "./templates/hypr.conf"
+output_path = "~/.config/hypr/colors.conf"
+
 [templates.qs]
 input_path = "./templates/qs.json"
 output_path = "~/.config/quickshell/config/json/matugen.json"

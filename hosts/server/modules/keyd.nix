@@ -15,6 +15,8 @@
             shift = "volumeup";
             control = "volumedown";
             escape = "~";
+            c = "f13";
+            v = "f14";
             q = "play";
             x = "next";
             z = "prev";

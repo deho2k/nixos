@@ -3,14 +3,15 @@ import qs.widgets
 import qs.config
 
 Background{
-  CircleProgressWrapper {
-    percentage: Config.cpuUsage
-    icon: ""
-    anchors.right: cpu.left
-  }
-  StyledText {
-    id: cpu
+  Row {
     anchors.centerIn: parent
-    text: Config.cpuUsage
+    CircleProgressWrapper {
+      percentage: Config.cpuUsage
+      icon: ""
+    }
+    StyledText {
+      id: cpu
+      text: Config.cpuUsage
+    }
   }
 }

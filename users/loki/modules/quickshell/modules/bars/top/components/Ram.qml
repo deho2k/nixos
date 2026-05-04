@@ -3,14 +3,15 @@ import qs.widgets
 import qs.config
 
 Background{
-  CircleProgressWrapper {
-    percentage: Config.memUsage
-    icon: ""
-    anchors.right: ram.left
-  }
-  StyledText {
-    id:ram
+  Row {
     anchors.centerIn: parent
-    text: Config.memUsage
+    CircleProgressWrapper {
+      percentage: Config.memUsage
+      icon: ""
+    }
+    StyledText {
+      id:ram
+      text: Config.memUsage
+    }
   }
 }

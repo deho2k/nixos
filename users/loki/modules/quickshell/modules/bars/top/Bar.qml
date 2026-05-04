@@ -20,7 +20,6 @@ Rectangle {
 
   Row {
     anchors.fill: parent
-    spacing: 2
     Clock {
       id: clock
       anchors.left: parent.left
@@ -28,6 +27,7 @@ Rectangle {
     Player {
       id: spotify
       anchors.left: clock.right
+      anchors.leftMargin: 20
     }
     Workspaces {
       id: workspaces
@@ -41,6 +41,7 @@ Rectangle {
     Ram {
       id: ram
       anchors.right: cpu.left
+      anchors.rightMargin: 20
     }
     Cpu{
       id: cpu
