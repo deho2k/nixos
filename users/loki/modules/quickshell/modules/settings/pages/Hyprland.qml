@@ -19,7 +19,17 @@ ColumnLayout {
     value: Config.hyprland.rounding
     onValueChanged: {
       Config.hyprland.rounding = value
-      Config.hyprlandRuntimePush("rounding", value)
+      Config.hyprlandRuntimePush()
+    }
+  }
+  Slider {
+    label: "border size"
+    from: 0
+    to: 12
+    value: Config.hyprland.borderSize
+    onValueChanged: {
+      Config.hyprland.borderSize = value
+      Config.hyprlandRuntimePush()
     }
   }
   Slider {
@@ -29,7 +39,7 @@ ColumnLayout {
     value: Config.hyprland.gapsIn
     onValueChanged: {
       Config.hyprland.gapsIn = value
-      Config.hyprlandRuntimePush("gapsIn", value)
+      Config.hyprlandRuntimePush()
     }
   }
   Slider {
@@ -39,7 +49,25 @@ ColumnLayout {
     value: Config.hyprland.gapsOut
     onValueChanged: {
       Config.hyprland.gapsOut = value
-      Config.hyprlandRuntimePush("gapsOut", value)
-    }  
+      Config.hyprlandRuntimePush()
+    }
+  }
+  Switch {
+    label:"animations"
+    checked: Config.hyprland.animations
+    onCheckedChanged: {
+      Config.hyprland.animations = checked
+      Config.hyprlandRuntimePush()
+    }
+  }
+  Dropdown {
+    Layout.fillWidth: true
+    label: "Theme"
+    options: ["end4", "fast", "dynamic","high","moving", "smooth"]
+    currentIndex: options.indexOf(Config.hyprland.animationType)
+    onCurrentIndexChanged: {
+      Config.hyprland.animationType = options[currentIndex]
+      Config.hyprlandRuntimePush()
+    }
   }
 }

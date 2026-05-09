@@ -12,7 +12,7 @@ Rectangle {
   property var margins: Config.bar.margins
   anchors.topMargin: margins
   anchors.bottomMargin: margins
-  anchors.leftMargin: margins > 0 ? 5 : 0
+  anchors.leftMargin: margins > 0 ? Math.min(Config.hyprland.gapsOut, 5) : 0
   radius: margins > 0 ? Config.bar.radius : 0
   Behavior on anchors.topMargin {
     NumberAnimation {

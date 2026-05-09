@@ -3,10 +3,9 @@
 {
   imports = [
     ./opts/hardware-configuration.nix 
-      ./opts/packages.nix
-      ./modules/keyd.nix
-      ./modules/hyprland.nix
-      ./modules/keyboardLight.nix
+    ./opts/packages.nix
+    ./modules/keyd.nix
+    ./modules/keyboardLight.nix
   ];
 
   boot.loader = {

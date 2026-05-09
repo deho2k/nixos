@@ -6,7 +6,7 @@ import Quickshell.Services.Mpris
 import Quickshell.Services.UPower 
 import QtQuick
 
-// everytime u se Config.somethingsomething it is indeed refering to functions
+// everytime u see Config.somethingsomething it is indeed refering to functions
 // and variables from this section
 Singleton {
   id: root
@@ -14,6 +14,10 @@ Singleton {
 
   // !! folder where u save ur matugen themes json files
   property string matugenThemes: "~/.config/matugen/themes/"
+
+  // Path to the Hyprland config file that Quickshell owns
+  readonly property string hyprlandSettingsFile:
+      Quickshell.env("HOME") + "/.config/hypr/quickshellSettings.conf"
 
   // mpris default chain
   property var player: {
@@ -68,9 +72,12 @@ Singleton {
         property string theme: "wallpaper"
       }
       property JsonObject hyprland: JsonObject {
+        property int borderSize: 2
         property int rounding: 8
         property int gapsIn: 8
         property int gapsOut: 8
+        property bool animations: true
+        property string animationType: "fast"
       }
     }
   }
@@ -177,7 +184,28 @@ Singleton {
 
   }
   // in the hyprland runtime file there are variables and i change them here
-  function hyprlandRuntimePush(name, value) {
-    Quickshell.execDetached(["bash", "-c", `sed -i 's/^\\$${name}=.*/\\$${name}=${value}/' ~/.config/hypr/hyprland/runtime.conf`])
+  function hyprlandRuntimePush() {
+
+    const bashScript = `
+cat > "${root.hyprlandSettingsFile}" << 'END'
+# Managed by Quickshell - edit via the settings panel, not directly.
+
+source=~/.config/hypr/hyprland/animations/${root.hyprland.animationType}.conf
+
+animations {
+  enabled = ${root.hyprland.animations? "yes" : "no"}
+}
+general {
+    gaps_in  = ${root.hyprland.gapsIn}
+    gaps_out = ${root.hyprland.gapsOut}
+    border_size = ${root.hyprland.borderSize}
+
+}
+decoration {
+    rounding = ${root.hyprland.rounding}
+}
+END
+`
+    Quickshell.execDetached(["bash", "-c", bashScript])
   }
 }

@@ -14,7 +14,7 @@ FloatingWindow {
   property string activePage: "General"
   visible: false
   implicitWidth: 800
-  implicitHeight: 550
+  implicitHeight: 600
   minimumSize: Qt.size(root.implicitWidth, root.implicitHeight)
   title: "Settings"
   color: "transparent"

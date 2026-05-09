@@ -1,28 +1,31 @@
 {
     "bar": {
-        "floating": true,
+        "floating": false,
         "gradient": true,
-        "gradientOpacity": 14,
+        "gradientOpacity": 11,
         "height": 30,
-        "margins": 310,
+        "margins": 10,
         "pos": "left",
-        "radius": 12,
-        "stripes": true,
+        "radius": 3,
+        "stripes": false,
         "width": 45,
         "workspaceIcons": true
     },
     "frame": {
-        "radius": 18,
-        "width": 0
+        "radius": 22,
+        "width": 10
     },
     "hyprland": {
+        "animationType": "fast",
+        "animations": true,
+        "borderSize": 2,
         "gapsIn": 2,
-        "gapsOut": 4,
-        "rounding": 4
+        "gapsOut": 10,
+        "rounding": 1
     },
     "theme": {
         "theme": "wallpaper",
         "transition": "outer",
-        "transitionDuration": 5
+        "transitionDuration": 3
     }
 }

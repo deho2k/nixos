@@ -3,7 +3,10 @@
   environment.systemPackages = [
     pkgs.git
   ];
-  programs.neovim.enable = true;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
   programs.steam.enable = true;
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono

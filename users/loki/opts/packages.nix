@@ -35,6 +35,7 @@
     pkgs.obs-studio
     pkgs.pavucontrol
     pkgs.spotatui
+    pkgs.krita
     #neovim
     pkgs.ripgrep
     pkgs.lua-language-server

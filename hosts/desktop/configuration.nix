@@ -5,11 +5,11 @@
         ./opts/hardware-configuration.nix 
         ./opts/packages.nix
         ./modules/keyd.nix
-        ./modules/hyprland.nix
     ];
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
+    hardware.opentabletdriver.enable = true;
     networking.hostName = "miku";
     networking.networkmanager.enable = true;
 

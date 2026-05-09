@@ -1,5 +1,6 @@
 
-{ pkgs, ... }: {
+{ pkgs,inputs, ... }: {
+  programs.hyprland.enable = true;
   users.users.loki = {
     isNormalUser = true;
     description = "miku";

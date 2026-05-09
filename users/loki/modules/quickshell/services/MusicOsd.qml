@@ -16,6 +16,8 @@ PanelWindow {
   implicitWidth: 400 + arcLeft.width + arcRight.width
   color: "transparent"
 
+  property bool floating: Config.bar.floating && Config.bar.pos == "top"
+
   readonly property int cardRadius: 14
   readonly property int artSize:    110
   readonly property int cardHeight: 120
@@ -25,6 +27,7 @@ PanelWindow {
       easing.type: Easing.InQuad
     }
   }
+  margins.top: floating? 5 : 0
   mask: Region {}
 
   property int aw: 40
@@ -33,6 +36,7 @@ PanelWindow {
 
   Shape {
     id: arcRight
+    visible: !playerOsd.floating
     width: playerOsd.aw
     height: playerOsd.ah
     anchors.left: root.right
@@ -53,6 +57,7 @@ PanelWindow {
   }
   Shape {
     id: arcLeft
+    visible: !playerOsd.floating
     width: playerOsd.aw
     height: playerOsd.ah
     anchors.right: root.left
@@ -105,7 +110,7 @@ PanelWindow {
     implicitHeight: playerOsd.cardHeight
 
     color:  Colors.background
-    radius: playerOsd.cardRadius; topLeftRadius:    0; topRightRadius: 0
+    radius: playerOsd.cardRadius; topLeftRadius: playerOsd.floating? playerOsd.cardRadius : 0   ; topRightRadius: playerOsd.floating? playerOsd.cardRadius : 0
 
     ClippingWrapperRectangle {
       id: albumArtFrame

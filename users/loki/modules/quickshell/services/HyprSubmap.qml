@@ -35,7 +35,7 @@ PanelWindow {
   }
 
   exclusionMode: ExclusionMode.Normal
-  anchors { left: true}
+  anchors.left: true
   property string currentSubmap: ""
   ListModel { id: binds }
   Process {
